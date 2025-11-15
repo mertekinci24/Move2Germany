@@ -1,0 +1,20 @@
+{
+  "modules": {
+    "housing": "Housing",
+    "bureaucracy": "Bureaucracy",
+    "work": "Work",
+    "social": "Social"
+  },
+  "timeWindows": {
+    "pre_arrival": "Pre-arrival (0–3 months before)",
+    "week_1": "Week 1",
+    "weeks_2_4": "Weeks 2–4",
+    "month_2": "Month 2",
+    "month_3": "Month 3"
+  },
+  "importance": {
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium"
+  }
+}
