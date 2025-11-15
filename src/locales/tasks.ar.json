@@ -1,0 +1,20 @@
+{
+  "modules": {
+    "housing": "السكن",
+    "bureaucracy": "البيروقراطية",
+    "work": "العمل",
+    "social": "الاجتماعي"
+  },
+  "timeWindows": {
+    "pre_arrival": "قبل الوصول (0-3 أشهر)",
+    "week_1": "الأسبوع 1",
+    "weeks_2_4": "الأسبوع 2-4",
+    "month_2": "الشهر 2",
+    "month_3": "الشهر 3"
+  },
+  "importance": {
+    "critical": "حرج",
+    "high": "عالي",
+    "medium": "متوسط"
+  }
+}
