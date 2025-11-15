@@ -1,0 +1,336 @@
+{
+  "actionBlocks": {
+    "anmeldung-icin-randevu-al": {
+      "actionLinks": [
+        {
+          "id": "berlin-anmeldung",
+          "label": "Berlin Bürgeramt Appointment",
+          "url": "https://service.berlin.de/dienstleistung/120686/",
+          "cityScope": ["berlin"],
+          "type": "official"
+        },
+        {
+          "id": "munich-anmeldung",
+          "label": "München Bürgerbüro Appointment",
+          "url": "https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1063475/",
+          "cityScope": ["munich"],
+          "type": "official"
+        },
+        {
+          "id": "general-anmeldung-info",
+          "label": "Make it in Germany - Registration Guide",
+          "url": "https://www.make-it-in-germany.com/en/living-in-germany/setting-up-home/registration",
+          "type": "info"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "passport",
+          "label": "Passport or ID card"
+        },
+        {
+          "id": "housing-contract",
+          "label": "Housing contract (Wohnungsgeberbestätigung)"
+        },
+        {
+          "id": "anmeldung-form",
+          "label": "Anmeldung form (filled)",
+          "optional": true
+        }
+      ]
+    },
+    "saglik-sigortasini-baslat": {
+      "actionLinks": [
+        {
+          "id": "tk-insurance",
+          "label": "TK - Techniker Krankenkasse",
+          "url": "https://www.tk.de/en",
+          "type": "tool"
+        },
+        {
+          "id": "aok-insurance",
+          "label": "AOK - Health Insurance",
+          "url": "https://www.aok.de/pk/",
+          "type": "tool"
+        },
+        {
+          "id": "barmer-insurance",
+          "label": "BARMER Health Insurance",
+          "url": "https://www.barmer.de/en",
+          "type": "tool"
+        },
+        {
+          "id": "health-insurance-guide",
+          "label": "Health Insurance Guide for Expats",
+          "url": "https://www.make-it-in-germany.com/en/living-in-germany/health-insurance",
+          "type": "info"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "passport",
+          "label": "Passport"
+        },
+        {
+          "id": "residence-permit",
+          "label": "Residence permit"
+        },
+        {
+          "id": "anmeldung-certificate",
+          "label": "Anmeldung certificate"
+        },
+        {
+          "id": "employment-contract",
+          "label": "Employment or student enrollment certificate"
+        }
+      ]
+    },
+    "banka-hesabi-ac": {
+      "actionLinks": [
+        {
+          "id": "n26-bank",
+          "label": "N26 - Online Bank",
+          "url": "https://n26.com/en-de",
+          "type": "tool"
+        },
+        {
+          "id": "deutsche-bank",
+          "label": "Deutsche Bank",
+          "url": "https://www.deutsche-bank.de/",
+          "type": "tool"
+        },
+        {
+          "id": "commerzbank",
+          "label": "Commerzbank",
+          "url": "https://www.commerzbank.de/",
+          "type": "tool"
+        },
+        {
+          "id": "sparkasse",
+          "label": "Sparkasse (Local branches)",
+          "url": "https://www.sparkasse.de/",
+          "type": "tool"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "passport",
+          "label": "Passport"
+        },
+        {
+          "id": "anmeldung-certificate",
+          "label": "Anmeldung certificate"
+        },
+        {
+          "id": "residence-permit",
+          "label": "Residence permit",
+          "optional": true
+        }
+      ]
+    },
+    "sim-kart-al": {
+      "actionLinks": [
+        {
+          "id": "o2-prepaid",
+          "label": "O2 Prepaid Plans",
+          "url": "https://www.o2online.de/tarife/prepaid/",
+          "type": "tool"
+        },
+        {
+          "id": "vodafone-prepaid",
+          "label": "Vodafone Prepaid",
+          "url": "https://www.vodafone.de/prepaid.html",
+          "type": "tool"
+        },
+        {
+          "id": "telekom-prepaid",
+          "label": "Deutsche Telekom Prepaid",
+          "url": "https://www.telekom.de/unterwegs/tarife-und-optionen/prepaid",
+          "type": "tool"
+        },
+        {
+          "id": "aldi-talk",
+          "label": "ALDI Talk (Budget option)",
+          "url": "https://www.alditalk.de/",
+          "type": "tool"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "passport",
+          "label": "Passport or ID"
+        },
+        {
+          "id": "anmeldung-optional",
+          "label": "Anmeldung (for contract plans)",
+          "optional": true
+        }
+      ]
+    },
+    "vergi-numarasi-steuer-id-talep-et": {
+      "actionLinks": [
+        {
+          "id": "bundeszentralamt-info",
+          "label": "Bundeszentralamt für Steuern - Tax ID",
+          "url": "https://www.bzst.de/DE/Privatpersonen/SteuerlicheIdentifikationsnummer/steuerlicheidentifikationsnummer_node.html",
+          "type": "official"
+        },
+        {
+          "id": "tax-id-guide",
+          "label": "How to get your Tax ID in Germany",
+          "url": "https://www.settle-in-berlin.com/tax-id-germany/",
+          "type": "info"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "anmeldung-certificate",
+          "label": "Anmeldung certificate (tax ID arrives by mail)"
+        }
+      ]
+    },
+    "kira-oda-ilanlarini-takip-et": {
+      "actionLinks": [
+        {
+          "id": "wg-gesucht",
+          "label": "WG-Gesucht (Room sharing)",
+          "url": "https://www.wg-gesucht.de/",
+          "type": "tool"
+        },
+        {
+          "id": "immoscout24",
+          "label": "ImmobilienScout24",
+          "url": "https://www.immobilienscout24.de/",
+          "type": "tool"
+        },
+        {
+          "id": "facebook-housing-groups",
+          "label": "Facebook Housing Groups",
+          "url": "https://www.facebook.com/groups/",
+          "type": "community"
+        },
+        {
+          "id": "studenten-wg-berlin",
+          "label": "Berlin Student Housing",
+          "url": "https://www.stw.berlin/en/housing.html",
+          "cityScope": ["berlin"],
+          "type": "official"
+        }
+      ],
+      "templates": [
+        {
+          "id": "landlord-message",
+          "label": "Message to landlord/flatmate",
+          "purpose": "housing",
+          "aiPromptKey": "housing_landlord_intro"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "schufa",
+          "label": "SCHUFA report"
+        },
+        {
+          "id": "income-proof",
+          "label": "Proof of income or blocked account"
+        },
+        {
+          "id": "cv",
+          "label": "CV (Lebenslauf)"
+        },
+        {
+          "id": "student-certificate",
+          "label": "Student enrollment certificate",
+          "optional": true
+        }
+      ]
+    },
+    "ilk-is-basvurunu-yap": {
+      "actionLinks": [
+        {
+          "id": "linkedin-jobs",
+          "label": "LinkedIn Jobs Germany",
+          "url": "https://www.linkedin.com/jobs/",
+          "type": "tool"
+        },
+        {
+          "id": "indeed-de",
+          "label": "Indeed Germany",
+          "url": "https://de.indeed.com/",
+          "type": "tool"
+        },
+        {
+          "id": "stepstone",
+          "label": "StepStone",
+          "url": "https://www.stepstone.de/",
+          "type": "tool"
+        },
+        {
+          "id": "xing-jobs",
+          "label": "XING Jobs",
+          "url": "https://www.xing.com/jobs",
+          "type": "tool"
+        }
+      ],
+      "templates": [
+        {
+          "id": "job-application-email",
+          "label": "Job application email",
+          "purpose": "job",
+          "aiPromptKey": "job_application_email"
+        },
+        {
+          "id": "cv-german",
+          "label": "German CV template guidance",
+          "purpose": "job",
+          "aiPromptKey": "job_cv_german_format"
+        }
+      ],
+      "documentChecklist": [
+        {
+          "id": "german-cv",
+          "label": "German-style CV (Lebenslauf)"
+        },
+        {
+          "id": "cover-letter",
+          "label": "Cover letter (Anschreiben)"
+        },
+        {
+          "id": "certificates",
+          "label": "Diploma and certificates"
+        }
+      ]
+    },
+    "kulup-gruba-katil": {
+      "actionLinks": [
+        {
+          "id": "meetup",
+          "label": "Meetup - Find local groups",
+          "url": "https://www.meetup.com/",
+          "type": "community"
+        },
+        {
+          "id": "internations",
+          "label": "InterNations - Expat Community",
+          "url": "https://www.internations.org/",
+          "type": "community"
+        },
+        {
+          "id": "berlin-expat-groups",
+          "label": "Berlin Expat Facebook Groups",
+          "url": "https://www.facebook.com/groups/",
+          "cityScope": ["berlin"],
+          "type": "community"
+        }
+      ],
+      "templates": [
+        {
+          "id": "social-intro-message",
+          "label": "Introduction message for groups",
+          "purpose": "social",
+          "aiPromptKey": "social_group_intro"
+        }
+      ]
+    }
+  }
+}

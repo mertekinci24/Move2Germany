@@ -1,0 +1,20 @@
+{
+  "modules": {
+    "housing": "Konut",
+    "bureaucracy": "Bürokrasi",
+    "work": "İş",
+    "social": "Sosyal"
+  },
+  "timeWindows": {
+    "pre_arrival": "Taşınmadan önce (0–3 ay)",
+    "week_1": "1. hafta",
+    "weeks_2_4": "2–4. hafta",
+    "month_2": "2. ay",
+    "month_3": "3. ay"
+  },
+  "importance": {
+    "critical": "Kritik",
+    "high": "Yüksek",
+    "medium": "Orta"
+  }
+}
