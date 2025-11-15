@@ -1,0 +1,818 @@
+{
+  "cities": [
+    {
+      "id": "aachen",
+      "name": "Aachen"
+    },
+    {
+      "id": "berlin",
+      "name": "Berlin"
+    },
+    {
+      "id": "munich",
+      "name": "Munich"
+    },
+    {
+      "id": "frankfurt",
+      "name": "Frankfurt"
+    },
+    {
+      "id": "hamburg",
+      "name": "Hamburg"
+    }
+  ],
+  "timeWindows": [
+    {
+      "id": "pre_arrival",
+      "label": "Pre-arrival (0–3 ay önce)"
+    },
+    {
+      "id": "week_1",
+      "label": "1. hafta"
+    },
+    {
+      "id": "weeks_2_4",
+      "label": "2–4. hafta"
+    },
+    {
+      "id": "month_2",
+      "label": "2. ay"
+    },
+    {
+      "id": "month_3",
+      "label": "3. ay"
+    }
+  ],
+  "modules": [
+    {
+      "id": "housing",
+      "label": "Konut"
+    },
+    {
+      "id": "bureaucracy",
+      "label": "Bürokrasi"
+    },
+    {
+      "id": "work",
+      "label": "İş"
+    },
+    {
+      "id": "social",
+      "label": "Sosyal"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "kira-oda-ilanlarini-takip-et",
+      "timeWindow": "pre_arrival",
+      "module": "housing",
+      "title": "Kira/oda ilanlarını takip et",
+      "description": "WG-Gesucht, Facebook, Telegram ve üniversite portallarında oda ilanlarını düzenli kontrol et.",
+      "dependencies": [],
+      "importance": "critical",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "basvuru-belgelerini-hazirla",
+      "timeWindow": "pre_arrival",
+      "module": "housing",
+      "title": "Başvuru belgelerini hazırla",
+      "description": "SCHUFA, özgeçmiş, öğrenci belgesi, beyan formu vb. evrakları başvurular için tamamla.",
+      "dependencies": [],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "vize-basvurunu-tamamla",
+      "timeWindow": "pre_arrival",
+      "module": "bureaucracy",
+      "title": "Vize başvurunu tamamla",
+      "description": "Öğrenci/expat vizesi için ücretli randevu al, evrakları yükle, pasaport ve kabul mektubunu hazırla.",
+      "dependencies": [],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "kira-sozlesmesi-imzala",
+      "timeWindow": "pre_arrival",
+      "module": "housing",
+      "title": "Kira sözleşmesi imzala",
+      "description": "Kabul alınca dijital/fiziksel kira kontratını imzala, depozito/ön ödeme yap.",
+      "dependencies": [
+        "basvuru-belgelerini-hazirla"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "saglik-sigortasini-sec",
+      "timeWindow": "pre_arrival",
+      "module": "bureaucracy",
+      "title": "Sağlık sigortasını seç",
+      "description": "Öğrenci veya expat için zorunlu sağlık sigortalarını araştır ve başla.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "ilan-sitelerine-kaydol",
+      "timeWindow": "pre_arrival",
+      "module": "work",
+      "title": "İlan sitelerine kaydol",
+      "description": "Minijob ve student job portallarına (StepStone, LinkedIn, Indeed) kayıt ol.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "gecici-adres-ayarla",
+      "timeWindow": "week_1",
+      "module": "housing",
+      "title": "Geçici adres ayarla",
+      "description": "Hostel, misafirlik veya kısa süreli oda bulamazsan geçici konaklama adresi ayarla.",
+      "dependencies": [],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "anmeldung-icin-randevu-al",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Anmeldung için randevu al",
+      "description": "Kira sözleşmesi veya adres kanıtı ile belediyeden ikamet randevusu al.",
+      "dependencies": [
+        "kira-sozlesmesi-imzala"
+      ],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Berlin'de randevular en az 4-6 hafta önce alınmalı."
+    },
+    {
+      "id": "saglik-sigortasini-baslat",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Sağlık sigortasını başlat",
+      "description": "Seçtiğin sigorta ile online/şubeden başlangıç onayı al, poliçeni kaydet.",
+      "dependencies": [
+        "saglik-sigortasini-sec"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "banka-hesabi-ac",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Banka hesabı aç",
+      "description": "Pasaport ve Anmeldung ile banka şubesine veya dijital bankaya başvur.",
+      "dependencies": [
+        "anmeldung-icin-randevu-al"
+      ],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "sim-kart-al",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "SIM kart al",
+      "description": "Prepaid veya kontratlı telefon hattı için kimlik/adres belgelerini hazırla.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Munich'te çoğu mağaza İngilizce destek veriyor."
+    },
+    {
+      "id": "vergi-numarasi-steuer-id-talep-et",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Vergi numarası (Steuer-ID) talep et",
+      "description": "Anmeldung yaptıktan sonra vergi dairesine başvurup Steuer-ID iste.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "ilk-is-basvurunu-yap",
+      "timeWindow": "week_1",
+      "module": "work",
+      "title": "İlk iş başvurunu yap",
+      "description": "Üniversite, portal veya Facebook grubu üzerinden iş başvurusu gönder.",
+      "dependencies": [
+        "banka-hesabi-ac"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "kulup-gruba-katil",
+      "timeWindow": "week_1",
+      "module": "social",
+      "title": "Kulüp/gruba katıl",
+      "description": "Meetup, Telegram, öğrenci inisiyatifleri veya sosyal etkinliklere göz at, katılım iste.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Berlin'de İngilizce etkinlik daha fazla."
+    },
+    {
+      "id": "anmeldung-islemlerini-tamamla",
+      "timeWindow": "weeks_2_4",
+      "module": "bureaucracy",
+      "title": "Anmeldung işlemlerini tamamla",
+      "description": "Randevu gününde belediyeye git; adres ve kira belgelerini teslim ederek kayıt yaptır.",
+      "dependencies": [
+        "anmeldung-icin-randevu-al"
+      ],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Munich'de bazı ilçelerde fiziki evrak gerekebilir."
+    },
+    {
+      "id": "sigorta-banka-belgelerini-dosyala",
+      "timeWindow": "weeks_2_4",
+      "module": "bureaucracy",
+      "title": "Sigorta/banka belgelerini dosyala",
+      "description": "Tüm evrakları dijital ve fiziksel arşivine ekle, sonraki başvurularda kolaylık olsun.",
+      "dependencies": [
+        "saglik-sigortasini-baslat",
+        "banka-hesabi-ac"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "mulakata-katil",
+      "timeWindow": "weeks_2_4",
+      "module": "work",
+      "title": "Mülakata katıl",
+      "description": "Olumlu başvuru dönüşü aldıysan, uygun zamanda iş mülakatına katıl.",
+      "dependencies": [
+        "ilk-is-basvurunu-yap"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "calisma-saatlerini-kontrol-et",
+      "timeWindow": "weeks_2_4",
+      "module": "work",
+      "title": "Çalışma saatlerini kontrol et",
+      "description": "Minijob'da haftalık veya aylık saat sınırını, oturum statüne göre denetle.",
+      "dependencies": [
+        "mulakata-katil"
+      ],
+      "importance": "critical",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "yeni-arkadaslar-edin",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Yeni arkadaşlar edin",
+      "description": "WG, okul ve sosyal aktivitelerde insanlarla iletişim/görüş alışkanlığı oluştur.",
+      "dependencies": [
+        "kulup-gruba-katil"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Aachen'da RWTH buddy sistemi var."
+    },
+    {
+      "id": "fatura-yan-giderleri-kontrol-et",
+      "timeWindow": "weeks_2_4",
+      "module": "housing",
+      "title": "Fatura/yan giderleri kontrol et",
+      "description": "Elektrik, internet, su gibi yan giderlerin sözleşme ve ödemesini başlat.",
+      "dependencies": [
+        "kira-sozlesmesi-imzala"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "adres-degisikligini-bildir",
+      "timeWindow": "weeks_2_4",
+      "module": "bureaucracy",
+      "title": "Adres değişikliğini bildir",
+      "description": "Yeni adrese taşındıysan belediyeye ve bankaya haber ver; Anmeldung güncelle.",
+      "dependencies": [
+        "anmeldung-islemlerini-tamamla"
+      ],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "kira-kazanc-takibini-yap",
+      "timeWindow": "weeks_2_4",
+      "module": "work",
+      "title": "Kira / kazanç takibini yap",
+      "description": "Kirayı rahat ödeyebilecek noktadaysan bütçe takibini başlat.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "kalici-konut-ilanlarini-takip-et",
+      "timeWindow": "month_2",
+      "module": "housing",
+      "title": "Kalıcı konut ilanlarını takip et",
+      "description": "Geçici adreste kaldıysan yeni WG/daire başvurularına devam et.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Hamburg'da stüdyo oda bulmak zor."
+    },
+    {
+      "id": "sigorta-policesini-guncelle",
+      "timeWindow": "month_2",
+      "module": "bureaucracy",
+      "title": "Sigorta poliçesini güncelle",
+      "description": "İş bulduysan yeni işveren üzerinden sigorta başlat, eski poliçeyi iptal et.",
+      "dependencies": [
+        "mulakata-katil"
+      ],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "vergi-numarasini-dosyala",
+      "timeWindow": "month_2",
+      "module": "bureaucracy",
+      "title": "Vergi numarasını dosyala",
+      "description": "Tax-ID/Steuer-ID eline ulaştıysa hem banka hem iş başvuruları için sistemine kaydet.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Frankfurt'ta staj ve iş başvurularında zorunlu."
+    },
+    {
+      "id": "ek-part-time-basvurusu-yap",
+      "timeWindow": "month_2",
+      "module": "work",
+      "title": "Ek part-time başvurusu yap",
+      "description": "Gelir yetmiyorsa başka portallar ve sosyal ağlardan ek iş ilanı takibi yap.",
+      "dependencies": [
+        "banka-hesabi-ac"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Berlin'de freelance ve dijital iş popüler."
+    },
+    {
+      "id": "mentor-bulmaya-calis",
+      "timeWindow": "month_2",
+      "module": "social",
+      "title": "Mentor bulmaya çalış",
+      "description": "Üniversitenin buddy veya mentor programına ya da grup sohbetlerine başvur.",
+      "dependencies": [
+        "yeni-arkadaslar-edin"
+      ],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "RWTH Aachen ve Berlin'de mentor sistemleri yaygın."
+    },
+    {
+      "id": "faturalari-ve-odemeleri-kontrol-et",
+      "timeWindow": "month_3",
+      "module": "housing",
+      "title": "Faturaları ve ödemeleri kontrol et",
+      "description": "Kirayı, yan giderleri ve faturaları düzenli ödediğinden emin ol.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Hamburg'da ödeme sistemleri değişken."
+    },
+    {
+      "id": "sozlesme-uzatma-yenileme",
+      "timeWindow": "month_3",
+      "module": "work",
+      "title": "Sözleşme uzatma/yenileme",
+      "description": "İşte veya stajda kaldıysan sözleşme sonuna bak, yenileme işlemlerine başla.",
+      "dependencies": [
+        "mulakata-katil"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Munich ve Frankfurt'ta stajlar kısa süreli."
+    },
+    {
+      "id": "tum-belgeleri-yedekle",
+      "timeWindow": "month_3",
+      "module": "bureaucracy",
+      "title": "Tüm belgeleri yedekle",
+      "description": "Tüm resmi belgelerini ve evraklarını dijital yedekle; bulut veya fiziksel arşiv oluştur.",
+      "dependencies": [
+        "sigorta-policesini-guncelle"
+      ],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ]
+    },
+    {
+      "id": "aktif-sosyal-katilim",
+      "timeWindow": "month_3",
+      "module": "social",
+      "title": "Aktif sosyal katılım",
+      "description": "Şehirdeki gönüllü, kültürel ve sosyal etkinliklere düzenli katıl.",
+      "dependencies": [
+        "mentor-bulmaya-calis"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Berlin'de kültürel etkinlikler çok yoğundur."
+    },
+    {
+      "id": "kira-zam-ve-yan-maliyet-kontrolu",
+      "timeWindow": "month_3",
+      "module": "housing",
+      "title": "Kira/zam ve yan maliyet kontrolü",
+      "description": "Yoğun kira artışı veya yan maliyet değişimi olduğunda işlem yap, yeni WG/daire bak.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Aachen'de siswa artışı dönemi zam olabiliyor."
+    },
+    {
+      "id": "almanca-dil-kursuna-yonel",
+      "timeWindow": "month_3",
+      "module": "work",
+      "title": "Almanca dil kursuna yönel",
+      "description": "Almanca seviyeni artırmak için kurs veya Sprachcafe bul, iş/yaşam için pratik yap.",
+      "dependencies": [
+        "aktif-sosyal-katilim"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "cityNote": "Berlin ve Munich'de ücretsiz Sprachcafe'ler mevcut."
+    },
+    {
+      "id": "rwth-aachen-konut-portalini-kontrol-et",
+      "timeWindow": "pre_arrival",
+      "module": "housing",
+      "title": "RWTH/Aachen konut portalını kontrol et",
+      "description": "RWTH yurtları ve Studierendenwerk portalında başvurunu tamamla.",
+      "dependencies": [
+        "basvuru-belgelerini-hazirla"
+      ],
+      "importance": "critical",
+      "repeat": "once",
+      "cityScope": [
+        "aachen"
+      ],
+      "cityNote": "Aachen'de yurtlar erken doluyor."
+    },
+    {
+      "id": "studentendorf-basvurusu-yap",
+      "timeWindow": "pre_arrival",
+      "module": "housing",
+      "title": "Studentendorf başvurusu yap",
+      "description": "Berlin'de Studentendorf ve Studierendenwerk başvuruları önceden tamamla.",
+      "dependencies": [
+        "basvuru-belgelerini-hazirla"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "berlin"
+      ],
+      "cityNote": "Başvuru dönemi erken kapanır."
+    },
+    {
+      "id": "rathaus-portalindan-dijital-randevu",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Rathaus portalından dijital randevu",
+      "description": "Anmeldung için stadt.rathaus veya stadtverwaltung portalını kullan.",
+      "dependencies": [
+        "kira-sozlesmesi-imzala"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "munich"
+      ],
+      "cityNote": "Munich'de bazı ilçelerde dijital başvuru yok."
+    },
+    {
+      "id": "finans-bankacilik-staj-basvurusu",
+      "timeWindow": "weeks_2_4",
+      "module": "work",
+      "title": "Finans/Bankacılık staj başvurusu",
+      "description": "Frankfurt'ta büyük bankalarda staj ilanlarını takip et, başvuru yap.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "frankfurt"
+      ],
+      "cityNote": "Frankfurt'ta finans iş ilanı yoğun."
+    },
+    {
+      "id": "ingilizce-sosyal-grup-bul",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "İngilizce sosyal grup bul",
+      "description": "Hamburg'da expat ve İngilizce konuşulan sosyal gruplara katıl.",
+      "dependencies": [
+        "yeni-arkadaslar-edin"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "hamburg"
+      ],
+      "cityNote": "Hamburg'da internasyonal gruplar aktif."
+    },
+    {
+      "id": "elektronik-anmeldung-dene",
+      "timeWindow": "month_2",
+      "module": "bureaucracy",
+      "title": "Elektronik Anmeldung dene",
+      "description": "Berlin'de elektronik Anmeldung ile online başvurunu tamamla.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "berlin"
+      ],
+      "cityNote": "Berlin'de dijital proses yaygınlaştı."
+    },
+    {
+      "id": "erasmus-expat-kulubune-katil",
+      "timeWindow": "month_2",
+      "module": "social",
+      "title": "Erasmus/expat kulübüne katıl",
+      "description": "RWTH ve FH'nin expat/erasmus topluluklarına üyelik başlat.",
+      "dependencies": [
+        "kulup-gruba-katil"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen"
+      ],
+      "cityNote": "Aachen'de bu etkinlikler fiziksel buluşmalı."
+    },
+    {
+      "id": "kira-zam-bildirimlerini-izle",
+      "timeWindow": "month_3",
+      "module": "housing",
+      "title": "Kira/Zam bildirimlerini izle",
+      "description": "Munich'te yüksek kira artışı/gider zammı olmuşsa yeni WG ilanlarını ara.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "munich"
+      ],
+      "cityNote": "Munich'de zam dönemleri sık."
+    },
+    {
+      "id": "expat-foruma-aktif-katilim",
+      "timeWindow": "month_3",
+      "module": "social",
+      "title": "Expat foruma aktif katılım",
+      "description": "Berlin'deki expat ve öğrenci forumlarında soru/cevap paylaş.",
+      "dependencies": [
+        "aktif-sosyal-katilim"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "berlin"
+      ],
+      "cityNote": "Berlin expat/öğrenci forumu çok aktif."
+    }
+  ]
+}

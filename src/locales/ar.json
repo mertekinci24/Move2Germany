@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "Move2Germany",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "language": "اللغة",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح"
+  },
+  "nav": {
+    "overview": "نظرة عامة",
+    "housing": "السكن",
+    "bureaucracy": "البيروقراطية",
+    "work": "العمل",
+    "social": "الاجتماعي",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "resetPassword": "إعادة تعيين كلمة المرور"
+  },
+  "onboarding": {
+    "welcome": "مرحباً بك في Move2Germany",
+    "step1Title": "المعلومات الشخصية",
+    "step2Title": "التفضيلات",
+    "selectCity": "اختر مدينتك",
+    "arrivalDate": "تاريخ الوصول",
+    "personaType": "أنا",
+    "student": "طالب",
+    "worker": "محترف",
+    "germanLevel": "مستوى اللغة الألمانية",
+    "budgetRange": "الميزانية الشهرية",
+    "complete": "إتمام الإعداد"
+  },
+  "dashboard": {
+    "todayTasks": "مهام اليوم",
+    "thisWeek": "هذا الأسبوع",
+    "criticalTasks": "المهام الحرجة",
+    "completedTasks": "مكتمل",
+    "inProgress": "قيد التنفيذ",
+    "todo": "للقيام به",
+    "blocked": "محظور"
+  },
+  "tasks": {
+    "status": "الحالة",
+    "notes": "ملاحظات",
+    "dueDate": "تاريخ الاستحقاق",
+    "importance": "الأهمية",
+    "critical": "حرج",
+    "high": "عالي",
+    "medium": "متوسط",
+    "dependencies": "التبعيات",
+    "documents": "المستندات",
+    "uploadDocument": "تحميل مستند",
+    "markAsDone": "تحديد كمكتمل",
+    "addNote": "إضافة ملاحظة"
+  },
+  "settings": {
+    "profileInfo": "معلومات الملف الشخصي",
+    "city": "المدينة",
+    "dataManagement": "إدارة البيانات",
+    "exportData": "تصدير بياناتي",
+    "exporting": "جاري التصدير...",
+    "dangerZone": "منطقة الخطر",
+    "deleteAccount": "حذف الحساب",
+    "deleteAccountWarning": "بمجرد حذف حسابك، لا يمكن التراجع. سيتم حذف جميع بياناتك نهائياً من خوادمنا.",
+    "changePassword": "تغيير كلمة المرور",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة"
+  },
+  "ai": {
+    "chatTitle": "المساعد الذكي",
+    "placeholder": "اسألني أي شيء عن الانتقال إلى ألمانيا...",
+    "send": "إرسال"
+  }
+}

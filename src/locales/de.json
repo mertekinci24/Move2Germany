@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "Move2Germany",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "language": "Sprache",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "nav": {
+    "overview": "Übersicht",
+    "housing": "Wohnen",
+    "bureaucracy": "Bürokratie",
+    "work": "Arbeit",
+    "social": "Soziales",
+    "settings": "Einstellungen"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "dontHaveAccount": "Noch kein Konto?",
+    "resetPassword": "Passwort zurücksetzen"
+  },
+  "onboarding": {
+    "welcome": "Willkommen bei Move2Germany",
+    "step1Title": "Persönliche Informationen",
+    "step2Title": "Präferenzen",
+    "selectCity": "Wählen Sie Ihre Stadt",
+    "arrivalDate": "Ankunftsdatum",
+    "personaType": "Ich bin",
+    "student": "Student",
+    "worker": "Berufstätig",
+    "germanLevel": "Deutschkenntnisse",
+    "budgetRange": "Monatliches Budget",
+    "complete": "Einrichtung abschließen"
+  },
+  "dashboard": {
+    "todayTasks": "Heutige Aufgaben",
+    "thisWeek": "Diese Woche",
+    "criticalTasks": "Kritische Aufgaben",
+    "completedTasks": "Abgeschlossen",
+    "inProgress": "In Bearbeitung",
+    "todo": "Zu erledigen",
+    "blocked": "Blockiert"
+  },
+  "tasks": {
+    "status": "Status",
+    "notes": "Notizen",
+    "dueDate": "Fälligkeitsdatum",
+    "importance": "Wichtigkeit",
+    "critical": "Kritisch",
+    "high": "Hoch",
+    "medium": "Mittel",
+    "dependencies": "Abhängigkeiten",
+    "documents": "Dokumente",
+    "uploadDocument": "Dokument hochladen",
+    "markAsDone": "Als erledigt markieren",
+    "addNote": "Notiz hinzufügen"
+  },
+  "settings": {
+    "profileInfo": "Profilinformationen",
+    "city": "Stadt",
+    "dataManagement": "Datenverwaltung",
+    "exportData": "Meine Daten exportieren",
+    "exporting": "Exportiert...",
+    "dangerZone": "Gefahrenzone",
+    "deleteAccount": "Konto löschen",
+    "deleteAccountWarning": "Sobald Sie Ihr Konto löschen, gibt es kein Zurück mehr. Alle Ihre Daten werden dauerhaft von unseren Servern gelöscht.",
+    "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort"
+  },
+  "ai": {
+    "chatTitle": "KI-Assistent",
+    "placeholder": "Fragen Sie mich alles über den Umzug nach Deutschland...",
+    "send": "Senden"
+  }
+}
