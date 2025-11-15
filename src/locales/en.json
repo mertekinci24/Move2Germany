@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "Move2Germany",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "language": "Language",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "nav": {
+    "overview": "Overview",
+    "housing": "Housing",
+    "bureaucracy": "Bureaucracy",
+    "work": "Work",
+    "social": "Social",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "resetPassword": "Reset Password"
+  },
+  "onboarding": {
+    "welcome": "Welcome to Move2Germany",
+    "step1Title": "Personal Information",
+    "step2Title": "Preferences",
+    "selectCity": "Select your city",
+    "arrivalDate": "Arrival date",
+    "personaType": "I am a",
+    "student": "Student",
+    "worker": "Professional",
+    "germanLevel": "German language level",
+    "budgetRange": "Monthly budget",
+    "complete": "Complete Setup"
+  },
+  "dashboard": {
+    "todayTasks": "Today's Tasks",
+    "thisWeek": "This Week",
+    "criticalTasks": "Critical Tasks",
+    "completedTasks": "Completed",
+    "inProgress": "In Progress",
+    "todo": "To Do",
+    "blocked": "Blocked"
+  },
+  "tasks": {
+    "status": "Status",
+    "notes": "Notes",
+    "dueDate": "Due Date",
+    "importance": "Importance",
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "dependencies": "Dependencies",
+    "documents": "Documents",
+    "uploadDocument": "Upload Document",
+    "markAsDone": "Mark as Done",
+    "addNote": "Add Note"
+  },
+  "settings": {
+    "profileInfo": "Profile Information",
+    "city": "City",
+    "dataManagement": "Data Management",
+    "exportData": "Export My Data",
+    "exporting": "Exporting...",
+    "dangerZone": "Danger Zone",
+    "deleteAccount": "Delete Account",
+    "deleteAccountWarning": "Once you delete your account, there is no going back. All your data will be permanently deleted from our servers.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password"
+  },
+  "ai": {
+    "chatTitle": "AI Assistant",
+    "placeholder": "Ask me anything about moving to Germany...",
+    "send": "Send"
+  }
+}
