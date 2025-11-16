@@ -1,0 +1,116 @@
+{
+  "common": {
+    "appName": "Move2Germany",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "close": "Kapat",
+    "back": "Geri",
+    "next": "İleri",
+    "language": "Dil",
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı"
+  },
+  "nav": {
+    "overview": "Genel Bakış",
+    "housing": "Konut",
+    "bureaucracy": "Bürokrasi",
+    "work": "İş",
+    "social": "Sosyal",
+    "settings": "Ayarlar"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "signup": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "confirmPassword": "Şifre Tekrar",
+    "forgotPassword": "Şifremi Unuttum?",
+    "alreadyHaveAccount": "Zaten hesabınız var mı?",
+    "dontHaveAccount": "Hesabınız yok mu?",
+    "resetPassword": "Şifre Sıfırla"
+  },
+  "onboarding": {
+    "welcome": "Move2Germany'ye Hoş Geldiniz",
+    "step1Title": "Kişisel Bilgiler",
+    "step2Title": "Tercihler",
+    "selectCity": "Şehrinizi seçin",
+    "arrivalDate": "Varış tarihi",
+    "personaType": "Ben bir",
+    "student": "Öğrenci",
+    "worker": "Profesyonel",
+    "germanLevel": "Almanca seviyesi",
+    "budgetRange": "Aylık bütçe",
+    "complete": "Kurulumu Tamamla"
+  },
+  "dashboard": {
+    "todayTasks": "Bugünün Görevleri",
+    "thisWeek": "Bu Hafta",
+    "criticalTasks": "Kritik Görevler",
+    "completedTasks": "Tamamlandı",
+    "inProgress": "Devam Ediyor",
+    "todo": "Yapılacak",
+    "blocked": "Engelli"
+  },
+  "tasks": {
+    "status": "Durum",
+    "notes": "Notlar",
+    "dueDate": "Son Tarih",
+    "importance": "Önem",
+    "critical": "Kritik",
+    "high": "Yüksek",
+    "medium": "Orta",
+    "dependencies": "Bağımlılıklar",
+    "documents": "Belgeler",
+    "uploadDocument": "Belge Yükle",
+    "markAsDone": "Tamamlandı Olarak İşaretle",
+    "addNote": "Not Ekle"
+  },
+  "settings": {
+    "profileInfo": "Profil Bilgileri",
+    "city": "Şehir",
+    "dataManagement": "Veri Yönetimi",
+    "exportData": "Verilerimi Dışa Aktar",
+    "exporting": "Dışa Aktarılıyor...",
+    "dangerZone": "Tehlikeli Bölge",
+    "deleteAccount": "Hesabı Sil",
+    "deleteAccountWarning": "Hesabınızı sildiğinizde geri dönüş yoktur. Tüm verileriniz sunucularımızdan kalıcı olarak silinecektir.",
+    "changePassword": "Şifre Değiştir",
+    "currentPassword": "Mevcut Şifre",
+    "newPassword": "Yeni Şifre"
+  },
+  "ai": {
+    "chatTitle": "AI Asistan",
+    "placeholder": "Almanya'ya taşınma hakkında bir şey sorun...",
+    "send": "Gönder"
+  },
+  "timeWindows": {
+    "pre_arrival": "Varıştan önce (0-3 ay önce)",
+    "week_1": "1. hafta",
+    "weeks_2_4": "2-4. hafta",
+    "month_2": "2. ay",
+    "month_3": "3. ay"
+  },
+  "modules": {
+    "housing": "Konut",
+    "bureaucracy": "Bürokrasi",
+    "work": "İş",
+    "social": "Sosyal"
+  },
+  "actionBlock": {
+    "title": "Aksiyon Kaynakları",
+    "officialLinks": "Resmi Linkler",
+    "suggestedPlatforms": "Önerilen Platformlar",
+    "requiredDocuments": "Gerekli Belgeler",
+    "aiTemplates": "AI Şablonları",
+    "generateTemplate": "Şablon Oluştur",
+    "copyTemplate": "Panoya Kopyala",
+    "copied": "Kopyalandı!",
+    "generating": "Oluşturuluyor...",
+    "optional": "Opsiyonel",
+    "noResources": "Bu görev için henüz aksiyon kaynağı yok."
+  }
+}
