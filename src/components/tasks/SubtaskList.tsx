@@ -6,7 +6,7 @@ import { useI18n } from '../../contexts/I18nContext';
 
 type SubtaskListProps = {
     task: Task;
-    userTask?: UserTask;
+    userTask?: Partial<UserTask>;
     linkedSubtaskStatus?: Record<string, boolean>;
     onToggle: (subtaskId: string, completed: boolean) => void;
     onNavigate?: (taskId: string) => void;

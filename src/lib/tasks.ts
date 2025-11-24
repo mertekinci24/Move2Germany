@@ -320,7 +320,7 @@ export async function updateUserSubtask(
   id: string,
   updates: { title?: string; isCompleted?: boolean; order?: number }
 ): Promise<UserSubtask> {
-  const dbUpdates: any = {};
+  const dbUpdates: Record<string, unknown> = {};
   if (updates.title !== undefined) dbUpdates.title = updates.title;
   if (updates.isCompleted !== undefined) dbUpdates.is_completed = updates.isCompleted;
   if (updates.order !== undefined) dbUpdates.order = updates.order;

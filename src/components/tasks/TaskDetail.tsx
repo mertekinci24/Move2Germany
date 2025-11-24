@@ -250,7 +250,11 @@ export function TaskDetail({ task, onClose, onUpdate, onNavigate }: TaskDetailPr
 
           <SubtaskList
             task={task}
-            userTask={{ ...task.userTask, subtaskProgress, metadata } as any}
+            userTask={
+              task.userTask
+                ? { ...task.userTask, subtaskProgress, metadata }
+                : { subtaskProgress, metadata }
+            }
             linkedSubtaskStatus={linkedSubtaskStatus}
             onToggle={handleToggleSubtask}
             onNavigate={onNavigate}
