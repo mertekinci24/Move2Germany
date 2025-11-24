@@ -153,16 +153,44 @@ export async function updatePassword(newPassword: string) {
 }
 
 export async function deleteAccount(userId: string) {
+  const timestamp = new Date().toISOString();
+
+  // Soft delete user
   const { error } = await supabase
     .from('users')
-    .update({ deleted_at: new Date().toISOString() })
+    .update({ deleted_at: timestamp })
     .eq('id', userId);
 
-  if (error) {
-    throw new Error(error.message);
-  }
+  if (error) throw new Error(error.message);
+
+  // Soft delete community content
+  await supabase.from('community_topics').update({ deleted_at: timestamp }).eq('author_id', userId);
+  await supabase.from('community_replies').update({ deleted_at: timestamp }).eq('author_id', userId);
+
+  // Hard delete private data (optional, but good for GDPR)
+  // await supabase.from('notes').delete().eq('user_id', userId);
 
   await signOut();
+}
+
+export async function exportUserData(userId: string) {
+  const tables = [
+    'users', 'user_tasks', 'documents', 'ai_conversations',
+    'notes', 'user_points', 'community_topics', 'community_replies'
+  ];
+
+  const exportData: Record<string, any> = {};
+
+  for (const table of tables) {
+    const { data } = await supabase
+      .from(table)
+      .select('*')
+      .eq(table === 'community_topics' || table === 'community_replies' ? 'author_id' : 'user_id', userId);
+
+    exportData[table] = data || [];
+  }
+
+  return exportData;
 }
 
 export async function signOut() {

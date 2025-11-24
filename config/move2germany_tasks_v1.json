@@ -77,6 +77,30 @@
         "munich",
         "frankfurt",
         "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "define_budget",
+          "title": "Bütçenizi ve kriterlerinizi belirleyin",
+          "required": true
+        },
+        {
+          "id": "prepare_documents",
+          "title": "Başvuru belgelerini hazırlayın (SCHUFA, maaş bordrosu)",
+          "type": "linked_task",
+          "linkedTaskId": "basvuru-belgelerini-hazirla",
+          "required": true
+        },
+        {
+          "id": "create_accounts",
+          "title": "Konut platformlarında hesap oluşturun",
+          "required": true
+        },
+        {
+          "id": "apply_listings",
+          "title": "İlanlara başvurun ve randevu alın",
+          "required": true
+        }
       ]
     },
     {

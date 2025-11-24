@@ -1,5 +1,5 @@
 
-import { Home, Building2, FileText, Briefcase, Users, Settings } from 'lucide-react';
+import { Home, Building2, FileText, Briefcase, Users, Settings, Book, Calendar } from 'lucide-react';
 import { useI18n } from '../../contexts/I18nContext';
 
 type SidebarProps = {
@@ -16,6 +16,9 @@ export function Sidebar({ currentView, onViewChange }: SidebarProps) {
     { id: 'bureaucracy', labelKey: 'nav.bureaucracy', icon: FileText },
     { id: 'work', labelKey: 'nav.work', icon: Briefcase },
     { id: 'social', labelKey: 'nav.social', icon: Users },
+    { id: 'notes', labelKey: 'nav.notes', icon: Book },
+    { id: 'calendar', labelKey: 'nav.calendar', icon: Calendar },
+    { id: 'community', labelKey: 'nav.community', icon: Users },
     { id: 'settings', labelKey: 'nav.settings', icon: Settings }
   ];
 
@@ -34,11 +37,10 @@ export function Sidebar({ currentView, onViewChange }: SidebarProps) {
             <button
               key={item.id}
               onClick={() => onViewChange(item.id)}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${isActive
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+                }`}
             >
               <Icon className="w-5 h-5" />
               <span className="font-medium">{t(item.labelKey)}</span>

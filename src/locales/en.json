@@ -11,7 +11,28 @@
     "language": "Language",
     "loading": "Loading...",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "resetPassword": "Reset Password",
+    "optional": "Optional"
+  },
+  "journey": {
+    "currentPhase": "Current Phase",
+    "phaseChange": {
+      "title": "New Phase Unlocked!",
+      "message": "Welcome to {phaseLabel}"
+    }
+  },
+  "housing": {
+    "providers": {
+      "wg_gesucht": "WG-Gesucht",
+      "immobilienscout24": "ImmobilienScout24",
+      "housinganywhere": "HousingAnywhere"
+    }
   },
   "nav": {
     "overview": "Overview",
@@ -19,6 +40,9 @@
     "bureaucracy": "Bureaucracy",
     "work": "Work",
     "social": "Social",
+    "notes": "Notes",
+    "calendar": "Calendar",
+    "community": "Community",
     "settings": "Settings"
   },
   "auth": {
@@ -47,33 +71,8 @@
     "complete": "Complete Setup"
   },
   "dashboard": {
-    "todayTasks": "Today's Tasks",
-    "thisWeek": "This Week",
-    "criticalTasks": "Critical Tasks",
-    "completedTasks": "Completed",
-    "inProgress": "In Progress",
-    "todo": "To Do",
-    "blocked": "Blocked"
-  },
-  "tasks": {
-    "status": "Status",
-    "notes": "Notes",
-    "dueDate": "Due Date",
-    "importance": "Importance",
     "critical": "Critical",
     "high": "High",
-    "medium": "Medium",
-    "dependencies": "Dependencies",
-    "documents": "Documents",
-    "uploadDocument": "Upload Document",
-    "markAsDone": "Mark as Done",
-    "addNote": "Add Note"
-  },
-  "settings": {
-    "profileInfo": "Profile Information",
-    "city": "City",
-    "dataManagement": "Data Management",
-    "exportData": "Export My Data",
     "exporting": "Exporting...",
     "dangerZone": "Danger Zone",
     "deleteAccount": "Delete Account",
@@ -112,5 +111,143 @@
     "generating": "Generating...",
     "optional": "Optional",
     "noResources": "No action resources available for this task yet."
+  },
+  "notes": {
+    "title": "My Journal",
+    "subtitle": "Keep track of your thoughts and important details.",
+    "newNote": "New Note",
+    "editNote": "Edit Note",
+    "noteTitle": "Title",
+    "noteContent": "Content",
+    "titlePlaceholder": "e.g., Apartment hunting checklist",
+    "contentPlaceholder": "Write your thoughts here...",
+    "emptyState": "No notes yet. Start writing!",
+    "deleteConfirm": "Are you sure you want to delete this note?",
+    "updated": "Updated",
+    "success": {
+      "created": "Note created",
+      "updated": "Note updated",
+      "deleted": "Note deleted"
+    },
+    "error": {
+      "load": "Failed to load notes",
+      "save": "Failed to save note",
+      "delete": "Failed to delete note",
+      "titleRequired": "Title is required"
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "today": "Today",
+    "tasksDue": "Tasks Due",
+    "events": "Events",
+    "noTasks": "No tasks due this day",
+    "noEvents": "No events this day",
+    "selectDate": "Select a date",
+    "selectDatePrompt": "Click on a date to view details",
+    "loading": "Loading calendar...",
+    "error": "Failed to load calendar data"
+  },
+  "events": {
+    "title": "Events",
+    "noEvents": "No upcoming events",
+    "noEventsDesc": "Check back later for social gatherings and workshops.",
+    "free": "Free",
+    "online": "Online",
+    "viewDetails": "View Details",
+    "detailsUnavailable": "Details Unavailable",
+    "error": "Failed to load events"
+  },
+  "community": {
+    "title": "Community",
+    "tabs": {
+      "forum": "Forum",
+      "chat": "City Chat"
+    },
+    "chat": {
+      "comingSoon": "City Chat Coming Soon",
+      "desc": "Connect with other expats in your city in real-time. We are putting the finishing touches on this feature."
+    },
+    "forum": {
+      "recentDiscussions": "Recent Discussions",
+      "newTopic": "New Topic",
+      "noTopics": "No topics yet",
+      "noTopicsDesc": "Be the first to start a discussion!",
+      "replies": "replies",
+      "backToDiscussions": "Back to Discussions",
+      "reply": "Reply",
+      "writeReply": "Write a reply...",
+      "noReplies": "No replies yet. Be the first to reply!",
+      "createTopic": "Start a New Discussion",
+      "topicTitle": "Title",
+      "topicCategory": "Category",
+      "topicContent": "Content",
+      "titlePlaceholder": "What's on your mind?",
+      "contentPlaceholder": "Share your thoughts, questions, or experiences...",
+      "postTopic": "Post Topic",
+      "posting": "Posting...",
+      "categories": {
+        "general": "General Discussion",
+        "housing": "Housing",
+        "bureaucracy": "Bureaucracy",
+        "social": "Social Life",
+        "jobs": "Jobs & Career"
+      },
+      "success": {
+        "created": "Topic created successfully",
+        "replyPosted": "Reply posted"
+      },
+      "error": {
+        "loadTopics": "Failed to load topics",
+        "loadReplies": "Failed to load replies",
+        "createTopic": "Failed to create topic",
+        "postReply": "Failed to post reply",
+        "fillAll": "Please fill in all fields"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "subtitle": "A glance at your 90-day journey",
+    "totalTasks": "Total Tasks",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "blocked": "Blocked",
+    "todo": "To Do",
+    "moduleProgress": "Module Progress",
+    "criticalTasks": "Critical Tasks",
+    "noCriticalTasks": "No critical tasks pending",
+    "noCriticalTasksDesc": "You're all caught up on high-priority items!"
+  },
+  "tasks": {
+    "importance": {
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "detail": {
+      "description": "Description",
+      "status": "Status",
+      "notes": "Notes",
+      "documents": "Documents",
+      "dependencies": "Dependencies",
+      "blockedBy": "This task is blocked by",
+      "completeFirst": "Complete these tasks first:",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "close": "Close",
+      "upload": "Upload document (PDF, JPG, PNG, max 10MB)",
+      "uploading": "Uploading...",
+      "deleteDocConfirm": "Are you sure you want to delete this document?",
+      "notesPlaceholder": "Add your notes here...",
+      "subtasks": "Subtasks",
+      "statusUpdated": "Status updated: {status}",
+      "mySubtasks": "My Subtasks",
+      "addSubtaskPlaceholder": "Add a subtask..."
+    },
+    "card": {
+      "dependencies": "dependency"
+    }
   }
 }

@@ -3,16 +3,18 @@ import { ExternalLink, FileText, Sparkles, Check, Copy } from 'lucide-react';
 import { Task, TaskActionLink } from '../../lib/config';
 import { useI18n } from '../../contexts/I18nContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { getUserTaskDocuments, toggleTaskDocument, UserTaskDocument } from '../../lib/documents';
+import { getUserTaskDocuments, toggleTaskDocument } from '../../lib/documents';
 import { designTokens } from '../../lib/design-tokens';
 import { generateAIResponse } from '../../lib/ai';
+import { getHousingLinks } from '../../lib/housing';
 
 type ActionBlockProps = {
   task: Task;
   userCity?: string;
+  metadata?: Record<string, any>;
 };
 
-export function ActionBlock({ task, userCity }: ActionBlockProps) {
+export function ActionBlock({ task, userCity, metadata }: ActionBlockProps) {
   const { t } = useI18n();
   const { user } = useAuth();
   const [checkedDocs, setCheckedDocs] = useState<Set<string>>(new Set());
@@ -24,7 +26,8 @@ export function ActionBlock({ task, userCity }: ActionBlockProps) {
   const hasActionBlocks =
     (task.actionLinks && task.actionLinks.length > 0) ||
     (task.templates && task.templates.length > 0) ||
-    (task.documentChecklist && task.documentChecklist.length > 0);
+    (task.documentChecklist && task.documentChecklist.length > 0) ||
+    (task.housingProviders && userCity);
 
   useEffect(() => {
     if (user && task.documentChecklist) {
@@ -123,8 +126,26 @@ export function ActionBlock({ task, userCity }: ActionBlockProps) {
     return null;
   }
 
+  // Extract housing criteria from metadata
+  const housingCriteria = metadata?.['housing_criteria'] || {};
+
+  const housingLinks = (task.housingProviders && userCity)
+    ? getHousingLinks(userCity, housingCriteria)
+      .filter(l => l.url !== null)
+      .map(l => ({
+        id: l.provider.id,
+        label: t(l.provider.labelKey),
+        url: l.url!,
+        type: 'tool' as const,
+        cityScope: [userCity]
+      }))
+    : [];
+
   const officialLinks = task.actionLinks?.filter(l => l.type === 'official') || [];
-  const toolLinks = task.actionLinks?.filter(l => l.type === 'tool' || l.type === 'community' || l.type === 'info') || [];
+  const toolLinks = [
+    ...(task.actionLinks?.filter(l => l.type === 'tool' || l.type === 'community' || l.type === 'info') || []),
+    ...housingLinks
+  ];
   const filteredOfficialLinks = filterLinksByCity(officialLinks);
   const filteredToolLinks = filterLinksByCity(toolLinks);
 
@@ -160,7 +181,7 @@ export function ActionBlock({ task, userCity }: ActionBlockProps) {
               {filteredOfficialLinks.map(link => (
                 <a
                   key={link.id}
-                  href={link.url}
+                  href={link.url!}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
@@ -191,7 +212,7 @@ export function ActionBlock({ task, userCity }: ActionBlockProps) {
               {filteredToolLinks.map(link => (
                 <a
                   key={link.id}
-                  href={link.url}
+                  href={link.url!}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
@@ -232,7 +253,7 @@ export function ActionBlock({ task, userCity }: ActionBlockProps) {
                   />
                   <span className="flex-1 text-gray-700">
                     {doc.label}
-                    {doc.optional && (
+                    {!doc.required && (
                       <span className="ml-2 text-sm text-gray-500">
                         ({t('actionBlock.optional')})
                       </span>

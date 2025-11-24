@@ -1,0 +1,37 @@
+[
+    {
+        "id": "pre_arrival",
+        "order": 1,
+        "minDaysFromArrival": -9999,
+        "maxDaysFromArrival": 0,
+        "labelKey": "timeWindows.pre_arrival"
+    },
+    {
+        "id": "week_1",
+        "order": 2,
+        "minDaysFromArrival": 1,
+        "maxDaysFromArrival": 7,
+        "labelKey": "timeWindows.week_1"
+    },
+    {
+        "id": "weeks_2_4",
+        "order": 3,
+        "minDaysFromArrival": 8,
+        "maxDaysFromArrival": 30,
+        "labelKey": "timeWindows.weeks_2_4"
+    },
+    {
+        "id": "month_2",
+        "order": 4,
+        "minDaysFromArrival": 31,
+        "maxDaysFromArrival": 60,
+        "labelKey": "timeWindows.month_2"
+    },
+    {
+        "id": "month_3",
+        "order": 5,
+        "minDaysFromArrival": 61,
+        "maxDaysFromArrival": 90,
+        "labelKey": "timeWindows.month_3"
+    }
+]

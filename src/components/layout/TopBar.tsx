@@ -9,7 +9,6 @@ type TopBarProps = {
   selectedCity: string;
   selectedTimeWindow: string;
   searchQuery: string;
-  onCityChange: (cityId: string) => void;
   onTimeWindowChange: (timeWindowId: string) => void;
   onSearchChange: (query: string) => void;
 };
@@ -18,7 +17,6 @@ export function TopBar({
   selectedCity,
   selectedTimeWindow,
   searchQuery,
-  onCityChange,
   onTimeWindowChange,
   onSearchChange
 }: TopBarProps) {
@@ -27,6 +25,8 @@ export function TopBar({
 
   const cities = configLoader.getCities();
   const timeWindows = configLoader.getTimeWindows();
+
+  const city = cities.find(c => c.id === selectedCity);
 
   return (
     <div className="bg-white border-b border-gray-200 px-6 py-4">
@@ -43,15 +43,9 @@ export function TopBar({
             />
           </div>
 
-          <select
-            value={selectedCity}
-            onChange={(e) => onCityChange(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            {cities.map(city => (
-              <option key={city.id} value={city.id}>{city.name}</option>
-            ))}
-          </select>
+          <div className="px-4 py-2 bg-gray-100 rounded-lg border border-gray-200 text-gray-700 font-medium">
+            {city?.name || selectedCity}
+          </div>
 
           <select
             value={selectedTimeWindow}
@@ -59,7 +53,7 @@ export function TopBar({
             className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {timeWindows.map(tw => (
-              <option key={tw.id} value={tw.id}>{tw.label}</option>
+              <option key={tw.id} value={tw.id}>{t(`timeWindows.${tw.id}`)}</option>
             ))}
           </select>
         </div>

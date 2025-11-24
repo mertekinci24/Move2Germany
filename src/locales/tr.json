@@ -11,7 +11,28 @@
     "language": "Dil",
     "loading": "Yükleniyor...",
     "error": "Hata",
-    "success": "Başarılı"
+    "success": "Başarılı",
+    "password": "Şifre",
+    "confirmPassword": "Şifre Tekrar",
+    "forgotPassword": "Şifremi Unuttum?",
+    "alreadyHaveAccount": "Zaten hesabınız var mı?",
+    "dontHaveAccount": "Hesabınız yok mu?",
+    "resetPassword": "Şifre Sıfırla",
+    "optional": "İsteğe bağlı"
+  },
+  "journey": {
+    "currentPhase": "Mevcut Aşama",
+    "phaseChange": {
+      "title": "Yeni Aşama Açıldı!",
+      "message": "{phaseLabel} aşamasına hoş geldiniz"
+    }
+  },
+  "housing": {
+    "providers": {
+      "wg_gesucht": "WG-Gesucht",
+      "immobilienscout24": "ImmobilienScout24",
+      "housinganywhere": "HousingAnywhere"
+    }
   },
   "nav": {
     "overview": "Genel Bakış",
@@ -19,19 +40,10 @@
     "bureaucracy": "Bürokrasi",
     "work": "İş",
     "social": "Sosyal",
+    "notes": "Notlar",
+    "calendar": "Takvim",
+    "community": "Topluluk",
     "settings": "Ayarlar"
-  },
-  "auth": {
-    "login": "Giriş Yap",
-    "signup": "Kayıt Ol",
-    "logout": "Çıkış Yap",
-    "email": "E-posta",
-    "password": "Şifre",
-    "confirmPassword": "Şifre Tekrar",
-    "forgotPassword": "Şifremi Unuttum?",
-    "alreadyHaveAccount": "Zaten hesabınız var mı?",
-    "dontHaveAccount": "Hesabınız yok mu?",
-    "resetPassword": "Şifre Sıfırla"
   },
   "onboarding": {
     "welcome": "Move2Germany'ye Hoş Geldiniz",
@@ -51,21 +63,6 @@
     "thisWeek": "Bu Hafta",
     "criticalTasks": "Kritik Görevler",
     "completedTasks": "Tamamlandı",
-    "inProgress": "Devam Ediyor",
-    "todo": "Yapılacak",
-    "blocked": "Engelli"
-  },
-  "tasks": {
-    "status": "Durum",
-    "notes": "Notlar",
-    "dueDate": "Son Tarih",
-    "importance": "Önem",
-    "critical": "Kritik",
-    "high": "Yüksek",
-    "medium": "Orta",
-    "dependencies": "Bağımlılıklar",
-    "documents": "Belgeler",
-    "uploadDocument": "Belge Yükle",
     "markAsDone": "Tamamlandı Olarak İşaretle",
     "addNote": "Not Ekle"
   },
@@ -112,5 +109,143 @@
     "generating": "Oluşturuluyor...",
     "optional": "Opsiyonel",
     "noResources": "Bu görev için henüz aksiyon kaynağı yok."
+  },
+  "notes": {
+    "title": "Notlarım",
+    "subtitle": "Düşüncelerinizi ve önemli detayları takip edin.",
+    "newNote": "Yeni Not",
+    "editNote": "Notu Düzenle",
+    "noteTitle": "Başlık",
+    "noteContent": "İçerik",
+    "titlePlaceholder": "örn., Ev arama kontrol listesi",
+    "contentPlaceholder": "Düşüncelerinizi buraya yazın...",
+    "emptyState": "Henüz not yok. Yazmaya başlayın!",
+    "deleteConfirm": "Bu notu silmek istediğinizden emin misiniz?",
+    "updated": "Güncellendi",
+    "success": {
+      "created": "Not oluşturuldu",
+      "updated": "Not güncellendi",
+      "deleted": "Not silindi"
+    },
+    "error": {
+      "load": "Notlar yüklenemedi",
+      "save": "Not kaydedilemedi",
+      "delete": "Not silinemedi",
+      "titleRequired": "Başlık gerekli"
+    }
+  },
+  "calendar": {
+    "title": "Takvim",
+    "today": "Bugün",
+    "tasksDue": "Bitiş Tarihi Gelenler",
+    "events": "Etkinlikler",
+    "noTasks": "Bugün için görev yok",
+    "noEvents": "Bugün için etkinlik yok",
+    "selectDate": "Bir tarih seçin",
+    "selectDatePrompt": "Detayları görmek için bir tarihe tıklayın",
+    "loading": "Takvim yükleniyor...",
+    "error": "Takvim verileri yüklenemedi"
+  },
+  "events": {
+    "title": "Etkinlikler",
+    "noEvents": "Yaklaşan etkinlik yok",
+    "noEventsDesc": "Sosyal toplantılar ve atölyeler için daha sonra tekrar kontrol edin.",
+    "free": "Ücretsiz",
+    "online": "Çevrimiçi",
+    "viewDetails": "Detayları Gör",
+    "detailsUnavailable": "Detaylar Mevcut Değil",
+    "error": "Etkinlikler yüklenemedi"
+  },
+  "community": {
+    "title": "Topluluk",
+    "tabs": {
+      "forum": "Forum",
+      "chat": "Şehir Sohbeti"
+    },
+    "chat": {
+      "comingSoon": "Şehir Sohbeti Yakında",
+      "desc": "Şehrinizdeki diğer gurbetçilerle gerçek zamanlı bağlantı kurun. Bu özellik üzerinde son dokunuşları yapıyoruz."
+    },
+    "forum": {
+      "recentDiscussions": "Son Tartışmalar",
+      "newTopic": "Yeni Konu",
+      "noTopics": "Henüz konu yok",
+      "noTopicsDesc": "İlk tartışmayı başlatan siz olun!",
+      "replies": "yanıt",
+      "backToDiscussions": "Tartışmalara Dön",
+      "reply": "Yanıtla",
+      "writeReply": "Bir yanıt yazın...",
+      "noReplies": "Henüz yanıt yok. İlk yanıtlayan siz olun!",
+      "createTopic": "Yeni Bir Tartışma Başlat",
+      "topicTitle": "Başlık",
+      "topicCategory": "Kategori",
+      "topicContent": "İçerik",
+      "titlePlaceholder": "Aklınızda ne var?",
+      "contentPlaceholder": "Düşüncelerinizi, sorularınızı veya deneyimlerinizi paylaşın...",
+      "postTopic": "Konuyu Gönder",
+      "posting": "Gönderiliyor...",
+      "categories": {
+        "general": "Genel Tartışma",
+        "housing": "Konut",
+        "bureaucracy": "Bürokrasi",
+        "social": "Sosyal Yaşam",
+        "jobs": "İş & Kariyer"
+      },
+      "success": {
+        "created": "Konu başarıyla oluşturuldu",
+        "replyPosted": "Yanıt gönderildi"
+      },
+      "error": {
+        "loadTopics": "Konular yüklenemedi",
+        "loadReplies": "Yanıtlar yüklenemedi",
+        "createTopic": "Konu oluşturulamadı",
+        "postReply": "Yanıt gönderilemedi",
+        "fillAll": "Lütfen tüm alanları doldurun"
+      }
+    }
+  },
+  "overview": {
+    "title": "Genel Bakış",
+    "subtitle": "90 günlük yolculuğunuza bir bakış",
+    "totalTasks": "Toplam Görev",
+    "completed": "Tamamlanan",
+    "inProgress": "Devam Eden",
+    "blocked": "Engellenen",
+    "todo": "Yapılacak",
+    "moduleProgress": "Modül İlerlemesi",
+    "criticalTasks": "Kritik Görevler",
+    "noCriticalTasks": "Bekleyen kritik görev yok",
+    "noCriticalTasksDesc": "Yüksek öncelikli tüm görevleri tamamladınız!"
+  },
+  "tasks": {
+    "importance": {
+      "critical": "Kritik",
+      "high": "Yüksek",
+      "medium": "Orta",
+      "low": "Düşük"
+    },
+    "detail": {
+      "description": "Açıklama",
+      "status": "Durum",
+      "notes": "Notlar",
+      "documents": "Belgeler",
+      "dependencies": "Bağımlılıklar",
+      "blockedBy": "Bu görevin bağımlılıkları var",
+      "completeFirst": "Önce bu görevleri tamamlayın:",
+      "saveChanges": "Değişiklikleri Kaydet",
+      "saving": "Kaydediliyor...",
+      "close": "Kapat",
+      "upload": "Belge yükle (PDF, JPG, PNG, maks 10MB)",
+      "uploading": "Yükleniyor...",
+      "deleteDocConfirm": "Bu belgeyi silmek istediğinizden emin misiniz?",
+      "notesPlaceholder": "Notlarınızı buraya ekleyin...",
+      "subtasks": "Alt Görevler",
+      "statusUpdated": "Durum güncellendi: {status}",
+      "mySubtasks": "Alt Görevlerim",
+      "addSubtaskPlaceholder": "Bir alt görev ekle..."
+    },
+    "card": {
+      "dependencies": "bağımlılık"
+    }
   }
 }

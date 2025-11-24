@@ -12,11 +12,83 @@ export type UserTask = {
   completedAt: string | null;
   createdAt: string;
   updatedAt: string;
+  subtaskProgress: Record<string, boolean>;
+  metadata: Record<string, any>;
+};
+
+export type UserSubtask = {
+  id: string;
+  userId: string;
+  taskId: string;
+  title: string;
+  isCompleted: boolean;
+  order: number;
+  createdAt: string;
 };
 
 export type TaskWithStatus = Task & {
   userTask?: UserTask;
 };
+
+export function computeTaskStatusOnChange(
+  currentStatus: UserTask['status'],
+  subtaskProgress: Record<string, boolean>,
+  linkedSubtaskStatus: Record<string, boolean>,
+  hasNotes: boolean,
+  hasDocuments: boolean,
+  requiredSubtaskIds: string[],
+  metadata: Record<string, any> = {},
+  taskConfig?: Task
+): UserTask['status'] {
+  // If already done, don't revert automatically unless explicitly requested (handled by UI)
+  // But if we are in todo, we might want to move to in_progress
+
+  if (currentStatus === 'todo') {
+    const hasStartedSimple = Object.values(subtaskProgress).some(v => v);
+    const hasStartedLinked = Object.values(linkedSubtaskStatus).some(v => v);
+    const hasMetadata = Object.keys(metadata).length > 0;
+
+    if (hasStartedSimple || hasStartedLinked || hasNotes || hasDocuments || hasMetadata) {
+      return 'in_progress';
+    }
+  }
+
+  // Auto-transition to done if all required subtasks are completed
+  // and we are currently in_progress (or todo)
+  if (currentStatus !== 'done' && requiredSubtaskIds.length > 0) {
+    const allRequiredDone = requiredSubtaskIds.every(id => {
+      // Check simple/linked subtasks
+      if (subtaskProgress[id] || linkedSubtaskStatus[id]) return true;
+
+      // Check complex subtasks (form_criteria, external_action)
+      const subtaskConfig = taskConfig?.subtasks?.find(s => s.id === id);
+      if (!subtaskConfig) return false;
+
+      if (subtaskConfig.type === 'form_criteria') {
+        // Considered done if all fields are present in metadata
+        const criteria = metadata[subtaskConfig.criteriaKey] || {};
+        return subtaskConfig.fields.every(field =>
+          criteria[field] !== undefined && criteria[field] !== null && criteria[field] !== ''
+        );
+      }
+
+      if (subtaskConfig.type === 'external_action') {
+        // Considered done if at least one provider is marked as completed in metadata
+        // Metadata structure: { [actionType]: { [providerId]: boolean } }
+        const actionProgress = metadata[subtaskConfig.actionType] || {};
+        return Object.values(actionProgress).some(v => v === true);
+      }
+
+      return false;
+    });
+
+    if (allRequiredDone) {
+      return 'done';
+    }
+  }
+
+  return currentStatus;
+}
 
 export async function getUserTasks(userId: string, filters?: {
   status?: string;
@@ -71,7 +143,9 @@ export async function createUserTask(userId: string, taskId: string): Promise<Us
     .insert({
       user_id: userId,
       task_id: taskId,
-      status: 'todo'
+      status: 'todo',
+      subtask_progress: {},
+      metadata: {}
     })
     .select()
     .single();
@@ -90,6 +164,9 @@ export async function updateUserTask(
     status?: UserTask['status'];
     notes?: string;
     customDueDate?: string | null;
+    subtaskProgress?: Record<string, boolean>;
+    hasDocuments?: boolean; // Optional, passed from UI if known
+    metadata?: Record<string, any>;
   }
 ): Promise<UserTask> {
   const existingTask = await getUserTask(userId, taskId);
@@ -99,14 +176,54 @@ export async function updateUserTask(
   }
 
   const dbUpdates: Record<string, unknown> = {};
+  let newStatus = updates.status || existingTask?.status || 'todo';
 
-  if (updates.status !== undefined) {
-    dbUpdates.status = updates.status;
-    if (updates.status === 'done') {
-      dbUpdates.completed_at = new Date().toISOString();
-    } else if (existingTask?.completedAt) {
-      dbUpdates.completed_at = null;
+  // Smart status logic
+  if (updates.status === undefined) {
+    // Only apply smart logic if status is NOT explicitly being updated
+    const currentSubtaskProgress = updates.subtaskProgress || existingTask?.subtaskProgress || {};
+    const currentNotes = updates.notes !== undefined ? updates.notes : existingTask?.notes;
+    const hasNotes = !!currentNotes && currentNotes.trim().length > 0;
+    const hasDocuments = updates.hasDocuments || false; // We might need to fetch this if critical, but for now rely on passed arg
+    const currentMetadata = { ...(existingTask?.metadata || {}), ...(updates.metadata || {}) };
+
+    // Get required subtasks from config
+    const taskConfig = configLoader.getTask(taskId);
+    const requiredSubtaskIds = taskConfig?.subtasks?.filter(s => s.required).map(s => s.id) || [];
+
+    // Fetch linked tasks status
+    const linkedSubtaskStatus: Record<string, boolean> = {};
+    if (taskConfig?.subtasks) {
+      for (const subtask of taskConfig.subtasks) {
+        if (subtask.type === 'linked_task' && subtask.linkedTaskId) {
+          const linkedTask = await getUserTask(userId, subtask.linkedTaskId);
+          linkedSubtaskStatus[subtask.id] = linkedTask?.status === 'done';
+        }
+      }
     }
+
+    newStatus = computeTaskStatusOnChange(
+      newStatus,
+      currentSubtaskProgress,
+      linkedSubtaskStatus,
+      hasNotes,
+      hasDocuments,
+      requiredSubtaskIds,
+      currentMetadata,
+      taskConfig
+    );
+
+    if (newStatus !== existingTask?.status) {
+      dbUpdates.status = newStatus;
+    }
+  } else {
+    dbUpdates.status = updates.status;
+  }
+
+  if (dbUpdates.status === 'done') {
+    dbUpdates.completed_at = new Date().toISOString();
+  } else if (existingTask?.completedAt && dbUpdates.status && dbUpdates.status !== 'done') {
+    dbUpdates.completed_at = null;
   }
 
   if (updates.notes !== undefined) {
@@ -115,6 +232,14 @@ export async function updateUserTask(
 
   if (updates.customDueDate !== undefined) {
     dbUpdates.custom_due_date = updates.customDueDate;
+  }
+
+  if (updates.subtaskProgress !== undefined) {
+    dbUpdates.subtask_progress = updates.subtaskProgress;
+  }
+
+  if (updates.metadata !== undefined) {
+    dbUpdates.metadata = updates.metadata;
   }
 
   const { data, error } = await supabase
@@ -137,6 +262,89 @@ export async function updateUserTask(
   return mapDbToUserTask(data);
 }
 
+export async function updateUserTaskMetadata(
+  userId: string,
+  taskId: string,
+  metadataUpdates: Record<string, any>
+): Promise<UserTask> {
+  const existingTask = await getUserTask(userId, taskId);
+  const currentMetadata = existingTask?.metadata || {};
+  const newMetadata = { ...currentMetadata, ...metadataUpdates };
+
+  return updateUserTask(userId, taskId, { metadata: newMetadata });
+}
+
+// --- User Subtasks CRUD ---
+
+export async function getUserSubtasks(userId: string, taskId: string): Promise<UserSubtask[]> {
+  const { data, error } = await supabase
+    .from('user_subtasks')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('task_id', taskId)
+    .order('order', { ascending: true })
+    .order('created_at', { ascending: true });
+
+  if (error) throw new Error(error.message);
+  return (data || []).map(mapDbToUserSubtask);
+}
+
+export async function createUserSubtask(userId: string, taskId: string, title: string): Promise<UserSubtask> {
+  // Get max order
+  const { data: maxOrderData } = await supabase
+    .from('user_subtasks')
+    .select('order')
+    .eq('user_id', userId)
+    .eq('task_id', taskId)
+    .order('order', { ascending: false })
+    .limit(1);
+
+  const nextOrder = (maxOrderData?.[0]?.order ?? -1) + 1;
+
+  const { data, error } = await supabase
+    .from('user_subtasks')
+    .insert({
+      user_id: userId,
+      task_id: taskId,
+      title,
+      order: nextOrder
+    })
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return mapDbToUserSubtask(data);
+}
+
+export async function updateUserSubtask(
+  id: string,
+  updates: { title?: string; isCompleted?: boolean; order?: number }
+): Promise<UserSubtask> {
+  const dbUpdates: any = {};
+  if (updates.title !== undefined) dbUpdates.title = updates.title;
+  if (updates.isCompleted !== undefined) dbUpdates.is_completed = updates.isCompleted;
+  if (updates.order !== undefined) dbUpdates.order = updates.order;
+
+  const { data, error } = await supabase
+    .from('user_subtasks')
+    .update(dbUpdates)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return mapDbToUserSubtask(data);
+}
+
+export async function deleteUserSubtask(id: string): Promise<void> {
+  const { error } = await supabase
+    .from('user_subtasks')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw new Error(error.message);
+}
+
 export async function getTasksWithStatus(
   userId: string,
   filters?: {
@@ -146,6 +354,8 @@ export async function getTasksWithStatus(
     importance?: Task['importance'];
     status?: UserTask['status'];
     search?: string;
+    locale?: string;
+    personaType?: string | null;
   }
 ): Promise<TaskWithStatus[]> {
   const tasks = configLoader.filterTasks({
@@ -153,7 +363,9 @@ export async function getTasksWithStatus(
     timeWindowId: filters?.timeWindowId,
     moduleId: filters?.moduleId,
     importance: filters?.importance,
-    search: filters?.search
+    search: filters?.search,
+    locale: filters?.locale,
+    personaType: filters?.personaType
   });
 
   const userTasks = await getUserTasks(userId, {
@@ -219,6 +431,20 @@ function mapDbToUserTask(data: Record<string, unknown>): UserTask {
     customDueDate: data.custom_due_date as string | null,
     completedAt: data.completed_at as string | null,
     createdAt: data.created_at as string,
-    updatedAt: data.updated_at as string
+    updatedAt: data.updated_at as string,
+    subtaskProgress: (data.subtask_progress as Record<string, boolean>) || {},
+    metadata: (data.metadata as Record<string, any>) || {}
+  };
+}
+
+function mapDbToUserSubtask(data: Record<string, unknown>): UserSubtask {
+  return {
+    id: data.id as string,
+    userId: data.user_id as string,
+    taskId: data.task_id as string,
+    title: data.title as string,
+    isCompleted: data.is_completed as boolean,
+    order: data.order as number,
+    createdAt: data.created_at as string
   };
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Locale, createTranslator, detectLocale, setLocaleCookie, getLocaleMeta } from '../lib/i18n';
 import { updateProfile } from '../lib/auth';
 import { useAuth } from './AuthContext';
@@ -6,7 +6,7 @@ import { useAuth } from './AuthContext';
 type I18nContextType = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: (path: string) => string;
+  t: (path: string, params?: Record<string, string | number>) => string;
   direction: 'ltr' | 'rtl';
 };
 

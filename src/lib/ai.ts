@@ -16,6 +16,7 @@ export type AiContext = {
   timeWindowId?: string;
   route?: string;
   taskId?: string;
+  locale?: string;
 };
 
 export type AiMessage = {
@@ -190,46 +191,39 @@ function parseToolArgs(argsStr: string): Record<string, unknown> {
   try {
     return JSON.parse(`{${argsStr}}`);
   } catch {
-    const parts = argsStr.split(',').map(p => p.trim());
-    const result: Record<string, unknown> = {};
-
-    parts.forEach(part => {
-      const [key, ...valueParts] = part.split(':');
-      const value = valueParts.join(':').trim().replace(/['"]/g, '');
-      result[key.trim()] = value;
-    });
-
-    return result;
+    return {};
   }
 }
 
-async function listTasksTool(args: Record<string, unknown>, context: AiContext): Promise<unknown> {
+async function listTasksTool(args: Record<string, unknown>, context: AiContext): Promise<Record<string, unknown>> {
   const tasks = await getTasksWithStatus(context.userId, {
-    cityId: args.cityId || context.cityId,
-    timeWindowId: args.timeWindowId || context.timeWindowId,
-    moduleId: args.moduleId,
-    importance: args.importance,
-    status: args.status
+    cityId: (args.cityId as string) || context.cityId,
+    timeWindowId: (args.timeWindowId as string) || context.timeWindowId,
+    moduleId: args.moduleId as string,
+    importance: args.importance as any,
+    locale: context.locale
   });
 
-  return tasks.slice(0, 10).map(t => ({
+  const taskList = tasks.map(t => ({
     id: t.id,
     title: t.title,
-    module: t.module,
+    description: t.description,
     importance: t.importance,
     status: t.userTask?.status || 'not_started'
   }));
+
+  return { tasks: taskList };
 }
 
 async function explainTaskTool(args: Record<string, unknown>, context: AiContext): Promise<Record<string, unknown>> {
-  const task = configLoader.getTask(args.taskId);
+  const task = configLoader.getTask(args.taskId as string);
 
   if (!task) {
     throw new Error('Task not found');
   }
 
-  const dependencies = configLoader.getTaskDependencies(args.taskId);
-  const userTask = await getUserTask(context.userId, args.taskId);
+  const dependencies = configLoader.getTaskDependencies(args.taskId as string);
+  const userTask = await getUserTask(context.userId, args.taskId as string);
 
   return {
     title: task.title,
@@ -246,12 +240,12 @@ async function explainTaskTool(args: Record<string, unknown>, context: AiContext
 async function updateTaskStatusTool(args: Record<string, unknown>, context: AiContext): Promise<Record<string, unknown>> {
   const validStatuses = ['todo', 'in_progress', 'done', 'blocked'];
 
-  if (!validStatuses.includes(args.status)) {
+  if (!validStatuses.includes(args.status as string)) {
     throw new Error('Invalid status');
   }
 
-  const userTask = await updateUserTask(context.userId, args.taskId, {
-    status: args.status
+  const userTask = await updateUserTask(context.userId, args.taskId as string, {
+    status: args.status as any
   });
 
   return {
@@ -270,7 +264,7 @@ async function openContentTool(args: Record<string, unknown>): Promise<Record<st
     'loneliness': 'Dealing with Loneliness: Join student clubs, attend Meetup events, use Tandem apps for language exchange. Universities offer buddy programs. Berlin has many international communities.'
   };
 
-  const content = contentMap[args.contentKey];
+  const content = contentMap[args.contentKey as string];
 
   if (!content) {
     return { message: 'Content not found for that topic' };

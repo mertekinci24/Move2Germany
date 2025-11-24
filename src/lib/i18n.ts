@@ -97,21 +97,24 @@ export function createTranslator(locale: Locale) {
   const localeTranslations = translations[locale];
   const fallbackTranslations = translations['en'];
 
-  return function t(path: string): string {
-    const value = getNestedValue(localeTranslations, path);
+  return function t(path: string, params?: Record<string, string | number>): string {
+    let value = getNestedValue(localeTranslations, path);
 
-    if (value !== path) {
-      return value;
+    if (value === path && locale !== 'en') {
+      value = getNestedValue(fallbackTranslations, path);
     }
 
-    if (locale !== 'en') {
-      const fallbackValue = getNestedValue(fallbackTranslations, path);
-      if (fallbackValue !== path) {
-        return fallbackValue;
-      }
+    if (value === path) {
+      return path;
     }
 
-    return path;
+    if (params) {
+      Object.entries(params).forEach(([key, paramValue]) => {
+        value = value.replace(new RegExp(`{{${key}}}`, 'g'), String(paramValue));
+      });
+    }
+
+    return value;
   };
 }
 

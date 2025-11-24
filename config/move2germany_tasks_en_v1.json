@@ -1,0 +1,257 @@
+[
+    {
+        "id": "kira-oda-ilanlarini-takip-et",
+        "title": "Follow rent/room listings",
+        "description": "Regularly check room listings on WG-Gesucht, Facebook, Telegram, and university portals.",
+        "subtasks": [
+            {
+                "id": "define_budget",
+                "title": "Define your budget and criteria",
+                "required": true
+            },
+            {
+                "id": "prepare_documents",
+                "title": "Prepare application documents (SCHUFA, payslips)",
+                "required": true
+            },
+            {
+                "id": "create_accounts",
+                "title": "Create accounts on housing platforms",
+                "required": true
+            },
+            {
+                "id": "apply_listings",
+                "title": "Apply to listings and book appointments",
+                "required": true
+            }
+        ]
+    },
+    {
+        "id": "basvuru-belgelerini-hazirla",
+        "title": "Prepare application documents",
+        "description": "Complete documents like SCHUFA, CV, student certificate, declaration form etc. for applications."
+    },
+    {
+        "id": "vize-basvurunu-tamamla",
+        "title": "Complete visa application",
+        "description": "Book a paid appointment for student/expat visa, upload documents, prepare passport and acceptance letter."
+    },
+    {
+        "id": "kira-sozlesmesi-imzala",
+        "title": "Sign rental agreement",
+        "description": "Sign the digital/physical rental contract upon acceptance and pay the deposit/advance payment."
+    },
+    {
+        "id": "saglik-sigortasini-sec",
+        "title": "Choose health insurance",
+        "description": "Research and start mandatory health insurance for students or expats."
+    },
+    {
+        "id": "ilan-sitelerine-kaydol",
+        "title": "Register on job portals",
+        "description": "Register on minijob and student job portals (StepStone, LinkedIn, Indeed)."
+    },
+    {
+        "id": "gecici-adres-ayarla",
+        "title": "Arrange temporary address",
+        "description": "If you cannot find a hostel, guest house, or short-term room, arrange a temporary accommodation address."
+    },
+    {
+        "id": "anmeldung-icin-randevu-al",
+        "title": "Book appointment for Anmeldung",
+        "description": "Book a residence registration appointment with the municipality using your rental contract or proof of address.",
+        "cityNote": "In Berlin, appointments should be booked at least 4-6 weeks in advance."
+    },
+    {
+        "id": "saglik-sigortasini-baslat",
+        "title": "Activate health insurance",
+        "description": "Get start approval online/branch with your chosen insurance and save your policy."
+    },
+    {
+        "id": "banka-hesabi-ac",
+        "title": "Open bank account",
+        "description": "Apply to a bank branch or digital bank with your passport and Anmeldung."
+    },
+    {
+        "id": "sim-kart-al",
+        "title": "Buy SIM card",
+        "description": "Prepare ID/address documents for a prepaid or contract phone line.",
+        "cityNote": "Most stores in Munich provide support in English."
+    },
+    {
+        "id": "vergi-numarasi-steuer-id-talep-et",
+        "title": "Request Tax ID (Steuer-ID)",
+        "description": "After completing Anmeldung, apply to the tax office and request a Steuer-ID."
+    },
+    {
+        "id": "ilk-is-basvurunu-yap",
+        "title": "Make first job application",
+        "description": "Send job applications via university, portal, or Facebook group."
+    },
+    {
+        "id": "kulup-gruba-katil",
+        "title": "Join a club/group",
+        "description": "Check out Meetup, Telegram, student initiatives, or social events and request to join.",
+        "cityNote": "There are more English events in Berlin."
+    },
+    {
+        "id": "anmeldung-islemlerini-tamamla",
+        "title": "Complete Anmeldung process",
+        "description": "Go to the municipality on the appointment day; submit address and rental documents to register.",
+        "cityNote": "Physical documents may be required in some districts of Munich."
+    },
+    {
+        "id": "sigorta-banka-belgelerini-dosyala",
+        "title": "File insurance/bank documents",
+        "description": "Add all documents to your digital and physical archive for ease in future applications."
+    },
+    {
+        "id": "mulakata-katil",
+        "title": "Attend interview",
+        "description": "If you received a positive application response, attend the job interview at the appropriate time."
+    },
+    {
+        "id": "calisma-saatlerini-kontrol-et",
+        "title": "Check working hours",
+        "description": "Check the weekly or monthly hour limit for Minijobs according to your residence status."
+    },
+    {
+        "id": "yeni-arkadaslar-edin",
+        "title": "Make new friends",
+        "description": "Build communication/meeting habits with people in WG, school, and social activities.",
+        "cityNote": "RWTH buddy system exists in Aachen."
+    },
+    {
+        "id": "fatura-yan-giderleri-kontrol-et",
+        "title": "Check bills/utilities",
+        "description": "Start contracts and payments for utilities like electricity, internet, and water."
+    },
+    {
+        "id": "adres-degisikligini-bildir",
+        "title": "Notify address change",
+        "description": "If you moved to a new address, inform the municipality and bank; update Anmeldung."
+    },
+    {
+        "id": "kira-kazanc-takibini-yap",
+        "title": "Track rent/income",
+        "description": "If you can comfortably pay rent, start budget tracking."
+    },
+    {
+        "id": "kalici-konut-ilanlarini-takip-et",
+        "title": "Follow permanent housing ads",
+        "description": "If you stayed at a temporary address, continue applying for new WGs/apartments.",
+        "cityNote": "It is difficult to find studio rooms in Hamburg."
+    },
+    {
+        "id": "sigorta-policesini-guncelle",
+        "title": "Update insurance policy",
+        "description": "If you found a job, start insurance through the new employer and cancel the old policy."
+    },
+    {
+        "id": "vergi-numarasini-dosyala",
+        "title": "File Tax ID",
+        "description": "If you received your Tax-ID/Steuer-ID, save it to your system for both bank and job applications.",
+        "cityNote": "Mandatory for internship and job applications in Frankfurt."
+    },
+    {
+        "id": "ek-part-time-basvurusu-yap",
+        "title": "Apply for extra part-time work",
+        "description": "If income is insufficient, follow extra job listings from other portals and social networks.",
+        "cityNote": "Freelance and digital work is popular in Berlin."
+    },
+    {
+        "id": "mentor-bulmaya-calis",
+        "title": "Try to find a mentor",
+        "description": "Apply to the university's buddy or mentor program or group chats.",
+        "cityNote": "Mentor systems are common in RWTH Aachen and Berlin."
+    },
+    {
+        "id": "faturalari-ve-odemeleri-kontrol-et",
+        "title": "Check bills and payments",
+        "description": "Ensure you pay rent, utilities, and bills regularly.",
+        "cityNote": "Payment systems vary in Hamburg."
+    },
+    {
+        "id": "sozlesme-uzatma-yenileme",
+        "title": "Contract extension/renewal",
+        "description": "If you stayed in a job or internship, check the end of the contract and start renewal procedures.",
+        "cityNote": "Internships are short-term in Munich and Frankfurt."
+    },
+    {
+        "id": "tum-belgeleri-yedekle",
+        "title": "Backup all documents",
+        "description": "Digitally backup all your official documents and papers; create a cloud or physical archive."
+    },
+    {
+        "id": "aktif-sosyal-katilim",
+        "title": "Active social participation",
+        "description": "Regularly participate in voluntary, cultural, and social events in the city.",
+        "cityNote": "Cultural events are very intense in Berlin."
+    },
+    {
+        "id": "kira-zam-ve-yan-maliyet-kontrolu",
+        "title": "Check rent increase and utility costs",
+        "description": "Take action when there is a significant rent increase or change in utility costs, look for new WG/apartments.",
+        "cityNote": "There can be raises during the student increase period in Aachen."
+    },
+    {
+        "id": "almanca-dil-kursuna-yonel",
+        "title": "Focus on German language course",
+        "description": "Find a course or Sprachcafe to improve your German level, practice for work/life.",
+        "cityNote": "Free Sprachcafes are available in Berlin and Munich."
+    },
+    {
+        "id": "rwth-aachen-konut-portalini-kontrol-et",
+        "title": "Check RWTH/Aachen housing portal",
+        "description": "Complete your application on RWTH dormitories and Studierendenwerk portal.",
+        "cityNote": "Dormitories fill up early in Aachen."
+    },
+    {
+        "id": "studentendorf-basvurusu-yap",
+        "title": "Apply to Studentendorf",
+        "description": "Complete Studentendorf and Studierendenwerk applications in Berlin in advance.",
+        "cityNote": "Application period closes early."
+    },
+    {
+        "id": "rathaus-portalindan-dijital-randevu",
+        "title": "Digital appointment from Rathaus portal",
+        "description": "Use stadt.rathaus or stadtverwaltung portal for Anmeldung.",
+        "cityNote": "There is no digital application in some districts in Munich."
+    },
+    {
+        "id": "finans-bankacilik-staj-basvurusu",
+        "title": "Finance/Banking internship application",
+        "description": "Follow internship listings in major banks in Frankfurt, apply.",
+        "cityNote": "Finance job listings are dense in Frankfurt."
+    },
+    {
+        "id": "ingilizce-sosyal-grup-bul",
+        "title": "Find English social group",
+        "description": "Join expat and English-speaking social groups in Hamburg.",
+        "cityNote": "International groups are active in Hamburg."
+    },
+    {
+        "id": "elektronik-anmeldung-dene",
+        "title": "Try electronic Anmeldung",
+        "description": "Complete your online application with electronic Anmeldung in Berlin.",
+        "cityNote": "Digital process has become widespread in Berlin."
+    },
+    {
+        "id": "erasmus-expat-kulubune-katil",
+        "title": "Join Erasmus/expat club",
+        "description": "Start membership in RWTH and FH's expat/erasmus communities.",
+        "cityNote": "These events are physical meetings in Aachen."
+    },
+    {
+        "id": "kira-zam-bildirimlerini-izle",
+        "title": "Monitor rent increase notifications",
+        "description": "If there has been a high rent increase/expense hike in Munich, look for new WG ads.",
+        "cityNote": "Raise periods are frequent in Munich."
+    },
+    {
+        "id": "expat-foruma-aktif-katilim",
+        "title": "Active participation in expat forum",
+        "description": "Share Q&A in expat and student forums in Berlin.",
+        "cityNote": "Berlin expat/student forum is very active."
+    }
+]

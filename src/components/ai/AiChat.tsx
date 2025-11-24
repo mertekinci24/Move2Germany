@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { sendMessage, AiContext } from '../../lib/ai';
 import { useAuth } from '../../contexts/AuthContext';
+import { useI18n } from '../../contexts/I18nContext';
 
 type AiChatProps = {
   context: Omit<AiContext, 'userId'>;
@@ -14,6 +15,7 @@ type Message = {
 
 export function AiChat({ context }: AiChatProps) {
   const { user } = useAuth();
+  const { locale } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -34,7 +36,7 @@ export function AiChat({ context }: AiChatProps) {
     setLoading(true);
 
     try {
-      const response = await sendMessage(userMessage, { ...context, userId: user.id }, conversationId);
+      const response = await sendMessage(userMessage, { ...context, userId: user.id, locale }, conversationId);
       setConversationId(response.conversationId);
       setMessages(prev => [...prev, { role: 'assistant', content: response.response }]);
     } catch {
@@ -84,11 +86,10 @@ export function AiChat({ context }: AiChatProps) {
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] p-3 rounded-lg ${
-                msg.role === 'user'
+              className={`max-w-[80%] p-3 rounded-lg ${msg.role === 'user'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-900'
-              }`}
+                }`}
             >
               <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
             </div>

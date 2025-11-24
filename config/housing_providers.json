@@ -1,0 +1,74 @@
+[
+    {
+        "id": "wg_gesucht",
+        "cityIds": [
+            "berlin",
+            "munich",
+            "hamburg",
+            "cologne",
+            "frankfurt",
+            "stuttgart",
+            "dusseldorf",
+            "leipzig",
+            "dortmund",
+            "essen",
+            "bremen",
+            "dresden",
+            "hanover",
+            "nuremberg",
+            "duisburg",
+            "bochum",
+            "wuppertal",
+            "bielefeld",
+            "bonn",
+            "munster"
+        ],
+        "type": "wg",
+        "urlTemplate": "https://www.wg-gesucht.de/wg-zimmer-in-{{citySlug}}.{{cityCode}}.0.1.0.html?offer_filter=1&city_id={{cityCode}}&noDeact=1&categories%5B%5D=0&rent_types%5B%5D=0",
+        "labelKey": "housing.providers.wg_gesucht",
+        "enabled": true
+    },
+    {
+        "id": "immobilienscout24",
+        "cityIds": [
+            "berlin",
+            "munich",
+            "hamburg",
+            "cologne",
+            "frankfurt",
+            "stuttgart",
+            "dusseldorf",
+            "leipzig",
+            "dortmund",
+            "essen",
+            "bremen",
+            "dresden",
+            "hanover",
+            "nuremberg",
+            "duisburg",
+            "bochum",
+            "wuppertal",
+            "bielefeld",
+            "bonn",
+            "munster"
+        ],
+        "type": "apartment",
+        "urlTemplate": "https://www.immobilienscout24.de/Suche/de/{{citySlug}}/wohnung-mieten?price=-{{maxRent}}&livingspace={{minSize}}-",
+        "labelKey": "housing.providers.immobilienscout24",
+        "enabled": true
+    },
+    {
+        "id": "housinganywhere",
+        "cityIds": [
+            "berlin",
+            "munich",
+            "hamburg",
+            "cologne",
+            "frankfurt"
+        ],
+        "type": "furnished",
+        "urlTemplate": "https://housinganywhere.com/s/{{citySlug}}--Germany",
+        "labelKey": "housing.providers.housinganywhere",
+        "enabled": true
+    }
+]

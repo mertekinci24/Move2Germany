@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Globe } from 'lucide-react';
 import { useI18n } from '../../contexts/I18nContext';
 import { getVisibleLocales, getLocaleMeta } from '../../lib/i18n';
@@ -36,9 +36,8 @@ export function LanguageSwitcher() {
                     setLocale(loc);
                     setIsOpen(false);
                   }}
-                  className={`w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors ${
-                    locale === loc ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
-                  }`}
+                  className={`w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors ${locale === loc ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <span>{meta.nativeLabel}</span>
