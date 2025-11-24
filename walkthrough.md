@@ -1,44 +1,46 @@
-a# V5.3 Journey & Persona Engine - Walkthrough
+# V5.4 Housing Copilot Upgrade Walkthrough
 
 ## Overview
-This update introduces the **Journey Phase Engine** and **Persona Engine v1**, transforming Move2Germany into a more dynamic and personalized copilot.
+This upgrade implements the "Enterprise Subtask Model" to enhance the Housing Copilot capabilities. It introduces a more robust data model for subtasks, enabling personalized housing criteria, external action tracking, and user-defined subtasks.
 
-## Key Features
+## Changes
 
-### 1. Journey Phase Engine
-*   **Automatic Phase Detection**: The app now calculates your current journey phase (e.g., "Pre-arrival", "Week 1") based on your arrival date.
-*   **Visual Indicator**: The current phase is displayed in the Overview header.
-*   **Phase Change Notification**: Users receive a one-time toast notification when they enter a new phase.
+### Database
+- **New Table**: `user_subtasks` for storing user-created subtasks.
+- **New Column**: `metadata` (JSONB) in `user_tasks` for storing task-specific data (e.g., housing criteria, action progress).
+- **RLS**: Policies added for `user_subtasks`.
 
-### 2. Persona Engine v1
-*   **Personalized Tasks**: Tasks can now be targeted to specific personas (e.g., "Student" or "Professional").
-*   **Filtering**: Users only see tasks relevant to their selected persona, reducing clutter.
+### Configuration & Types
+- **`TaskSubtask`**: Updated to a discriminated union supporting:
+    - `simple`: Standard checkboxes.
+    - `linked_task`: References to other tasks.
+    - `form_criteria`: Data input forms (e.g., max rent, min size).
+    - `external_action`: External platform actions (e.g., signups).
 
-### 3. Internationalization (i18n)
-*   Full support for English, Turkish, and Arabic for all new features.
+### Logic
+- **Status Calculation**: `computeTaskStatusOnChange` now accounts for:
+    - `form_criteria` completion (all fields filled).
+    - `external_action` completion (at least one provider actioned).
+- **Housing URL Generation**: `generateHousingUrl` now uses `metadata` to inject user criteria (max rent, min size) into provider URLs.
+
+### UI Components
+- **`SubtaskList`**: Refactored to render the new subtask types.
+- **`SubtaskEditor`**: New component allowing users to add/edit/delete their own subtasks.
+- **`ActionBlock`**: Updated to use `metadata` for generating personalized housing links.
 
 ## Verification
 
 ### Automated Tests
-All unit and integration tests passed:
-```bash
-npm test
-```
-*   `src/lib/journey.test.ts`: Verified phase calculation logic.
-*   `src/lib/config.test.ts`: Verified persona filtering logic.
-*   `src/lib/tasks.test.ts`: Verified task fetching with filters.
+- **Subtask Creation**: Verified optimistic updates and error handling with unit tests.
+- **i18n**: Verified keys are present and correctly used.
+- **RLS**: Verified policies allow users to manage their own subtasks.
 
-### Manual Verification Checklist
-- [x] **Journey Phase**:
-    - [x] Set arrival date to various past/future dates.
-    - [x] Verified correct phase is selected.
-    - [x] Verified "New Phase" toast appears only once per phase change.
-- [x] **Persona Filtering**:
-    - [x] Verified "Student" users see student-specific tasks.
-    - [x] Verified "Professional" users do not see student-only tasks.
-- [x] **i18n**:
-    - [x] Verified translations in English, Turkish, and Arabic.
+### Automated Tests
+- `npm test src/components/tasks/SubtaskEditor.test.tsx`: Passed (3 tests)
 
-## Configuration
-*   **Journey Phases**: Defined in `src/config/journey_phases_v1.json`.
-*   **Task Personas**: Defined in `src/config/move2germany_tasks_v1.json` (using `personas` field).
+### Manual Verification Steps
+1.  **Housing Task**: Open "Find Housing" task.
+2.  **Criteria**: Fill in "Max Rent" and "Min Size".
+3.  **Links**: Verify that "Search on WG-Gesucht" link includes the city code and criteria.
+4.  **Subtasks**: Add a custom subtask "Call landlord". Verify it persists.
+5.  **Status**: Verify task moves to "In Progress" when criteria are added.
