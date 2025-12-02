@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { updateProfile, changePassword, deleteAccount } from '../../lib/auth';
 import { configLoader } from '../../lib/config';
+import { useI18n } from '../../contexts/I18nContext';
+import { VISIBLE_LOCALES, getLocaleMeta } from '../../lib/i18n';
 
 export function SettingsView() {
   const { user, refreshUser } = useAuth();
+  const { t } = useI18n();
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -35,7 +38,7 @@ export function SettingsView() {
     try {
       await updateProfile(user.id, profileData);
       await refreshUser();
-      setMessage('Profile updated successfully');
+      setMessage(t('settings.success.profile'));
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -48,12 +51,12 @@ export function SettingsView() {
     if (!user) return;
 
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('settings.error.passwordMatch'));
       return;
     }
 
     if (passwordData.newPassword.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError(t('settings.error.passwordLength'));
       return;
     }
 
@@ -63,7 +66,7 @@ export function SettingsView() {
 
     try {
       await changePassword(passwordData.newPassword);
-      setMessage('Password changed successfully');
+      setMessage(t('settings.success.password'));
       setPasswordData({ newPassword: '', confirmPassword: '' });
     } catch (err) {
       setError((err as Error).message);
@@ -75,7 +78,7 @@ export function SettingsView() {
   async function handleDeleteAccount() {
     if (!user) return;
 
-    if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    if (!confirm(t('settings.deleteConfirm'))) {
       return;
     }
 
@@ -93,8 +96,8 @@ export function SettingsView() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600 mt-2">Manage your account and preferences</p>
+        <h1 className="text-3xl font-bold text-gray-900">{t('settings.title')}</h1>
+        <p className="text-gray-600 mt-2">{t('settings.subtitle')}</p>
       </div>
 
       {message && (
@@ -110,10 +113,10 @@ export function SettingsView() {
       )}
 
       <div className="bg-white p-6 rounded-lg shadow space-y-6">
-        <h2 className="text-xl font-bold text-gray-900">Profile Information</h2>
+        <h2 className="text-xl font-bold text-gray-900">{t('settings.profileInfo')}</h2>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.email')}</label>
           <input
             type="email"
             value={user?.email}
@@ -123,19 +126,25 @@ export function SettingsView() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.language')}</label>
           <select
             value={profileData.locale}
             onChange={(e) => setProfileData(prev => ({ ...prev, locale: e.target.value }))}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="en">English</option>
-            <option value="tr">Türkçe</option>
+            {VISIBLE_LOCALES.map(locale => {
+              const meta = getLocaleMeta(locale);
+              return (
+                <option key={locale} value={locale}>
+                  {meta.nativeLabel}
+                </option>
+              );
+            })}
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.city')}</label>
           <select
             value={profileData.primaryCityId}
             onChange={(e) => setProfileData(prev => ({ ...prev, primaryCityId: e.target.value }))}
@@ -148,7 +157,7 @@ export function SettingsView() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Arrival Date</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.arrivalDate')}</label>
           <input
             type="date"
             value={profileData.arrivalDate}
@@ -158,7 +167,7 @@ export function SettingsView() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.status')}</label>
           <select
             value={profileData.personaType}
             onChange={(e) => setProfileData(prev => ({ ...prev, personaType: e.target.value }))}
@@ -170,7 +179,7 @@ export function SettingsView() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">German Level</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.germanLevel')}</label>
           <select
             value={profileData.germanLevel}
             onChange={(e) => setProfileData(prev => ({ ...prev, germanLevel: e.target.value }))}
@@ -185,7 +194,7 @@ export function SettingsView() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.budgetRange')}</label>
           <select
             value={profileData.budgetRange}
             onChange={(e) => setProfileData(prev => ({ ...prev, budgetRange: e.target.value }))}
@@ -202,19 +211,19 @@ export function SettingsView() {
           disabled={saving}
           className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
         >
-          {saving ? 'Saving...' : 'Save Profile'}
+          {saving ? t('settings.saving') : t('settings.saveProfile')}
         </button>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow space-y-6">
-        <h2 className="text-xl font-bold text-gray-900">Change Password</h2>
+        <h2 className="text-xl font-bold text-gray-900">{t('settings.changePassword')}</h2>
         <p className="text-sm text-gray-600">
-          Update your password using Supabase's secure authentication system.
+          {t('settings.passwordDesc')}
         </p>
 
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.newPassword')}</label>
             <input
               type="password"
               value={passwordData.newPassword}
@@ -223,11 +232,11 @@ export function SettingsView() {
               minLength={8}
               required
             />
-            <p className="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
+            <p className="text-xs text-gray-500 mt-1">{t('settings.minChars')}</p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('settings.confirmPassword')}</label>
             <input
               type="password"
               value={passwordData.confirmPassword}
@@ -243,22 +252,22 @@ export function SettingsView() {
             disabled={saving}
             className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
           >
-            {saving ? 'Changing...' : 'Change Password'}
+            {saving ? t('settings.changing') : t('settings.changePassword')}
           </button>
         </form>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow space-y-4">
-        <h2 className="text-xl font-bold text-red-600">Danger Zone</h2>
+        <h2 className="text-xl font-bold text-red-600">{t('settings.dangerZone')}</h2>
         <p className="text-sm text-gray-600">
-          Once you delete your account, there is no going back. All your data will be permanently deleted.
+          {t('settings.deleteAccountWarning')}
         </p>
         <button
           onClick={handleDeleteAccount}
           disabled={saving}
           className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
         >
-          Delete Account
+          {t('settings.deleteAccount')}
         </button>
       </div>
     </div>

@@ -1,0 +1,236 @@
+{
+    "phase": "enterprise_plan",
+    "goal": "Move2Germany platformunu React 18, Supabase ve AI desteğiyle, konfigürasyon tabanlı, güvenli ve ölçeklenebilir bir mimaride hayata geçirmek.",
+    "epics": [
+        {
+            "id": "epic-1",
+            "title": "Initialization & Infrastructure",
+            "description": "Proje iskeletinin oluşturulması, CI/CD pipeline'ının kurulması, temel paketlerin (Vite, React, TS, Supabase Client) yüklenmesi ve i18n altyapısının hazırlanması.",
+            "deliverables": [
+                "package.json",
+                "vite.config.ts",
+                "supabase/config.toml",
+                ".github/workflows/ci.yml",
+                "src/i18n/"
+            ],
+            "db_migrations": [
+                "supabase/migrations/20251125000000_init.sql"
+            ],
+            "api_changes": [],
+            "ui_changes": [
+                "src/App.tsx",
+                "src/layouts/MainLayout.tsx"
+            ],
+            "tests": [
+                "unit:src/App.test.tsx",
+                "e2e:tests/smoke.spec.ts"
+            ],
+            "acceptance_criteria": [
+                "Build başarılı",
+                "Lint hatası yok",
+                "CI pipeline çalışıyor",
+                "i18n TR/EN/AR çalışıyor"
+            ],
+            "risks": [
+                "Supabase proje bağlantı sorunları"
+            ],
+            "review_checklist": [
+                "ci: build & test",
+                "i18n: keys present"
+            ]
+        },
+        {
+            "id": "epic-2",
+            "title": "Core Data & Security (RLS)",
+            "description": "Veritabanı şemasının (profiles, flows, user_applications) oluşturulması, RLS politikalarının yazılması ve Audit Log mekanizmasının kurulması.",
+            "deliverables": [
+                "supabase/migrations/20251125_schema.sql",
+                "supabase/migrations/20251125_rls.sql"
+            ],
+            "db_migrations": [
+                "supabase/migrations/20251125_schema.sql",
+                "supabase/migrations/20251125_rls.sql"
+            ],
+            "api_changes": [],
+            "ui_changes": [],
+            "tests": [
+                "unit:supabase/tests/database/rls.test.sql"
+            ],
+            "acceptance_criteria": [
+                "RLS aktif",
+                "Kullanıcılar sadece kendi verisini görüyor",
+                "Audit log çalışıyor"
+            ],
+            "risks": [
+                "Yanlış RLS politikası veri sızıntısı yaratabilir"
+            ],
+            "review_checklist": [
+                "security: RLS verified",
+                "security: PII handling"
+            ]
+        },
+        {
+            "id": "epic-3",
+            "title": "Config-Driven UI Engine",
+            "description": "JSON şemalarını okuyup dinamik formlar ve akışlar üreten 'FlowRenderer' motorunun ve State Machine mantığının geliştirilmesi.",
+            "deliverables": [
+                "src/components/FlowRenderer.tsx",
+                "src/lib/flow-engine.ts",
+                "src/types/flow.ts"
+            ],
+            "db_migrations": [],
+            "api_changes": [],
+            "ui_changes": [
+                "src/components/DynamicForm.tsx",
+                "src/components/StepWizard.tsx"
+            ],
+            "tests": [
+                "unit:src/lib/flow-engine.test.ts",
+                "component:src/components/FlowRenderer.test.tsx"
+            ],
+            "acceptance_criteria": [
+                "JSON'dan form render ediliyor",
+                "Validasyon kuralları çalışıyor",
+                "State geçişleri doğru"
+            ],
+            "risks": [
+                "Karmaşık validasyon mantığı performansı etkileyebilir"
+            ],
+            "review_checklist": [
+                "ci: build & test",
+                "performance: render cycle"
+            ]
+        },
+        {
+            "id": "epic-4",
+            "title": "Visa Flows (Blue Card 2025)",
+            "description": "Mavi Kart 2025 kurallarını (maaş eşikleri, meslek listeleri) içeren JSON konfigürasyonlarının ve özel iş mantığının (tarih hesaplama vb.) uygulanması.",
+            "deliverables": [
+                "src/flows/blue-card-2025.json",
+                "src/lib/visa-logic.ts"
+            ],
+            "db_migrations": [
+                "supabase/seed.sql"
+            ],
+            "api_changes": [],
+            "ui_changes": [
+                "src/pages/VisaApplication.tsx"
+            ],
+            "tests": [
+                "unit:src/lib/visa-logic.test.ts",
+                "e2e:tests/blue-card-flow.spec.ts"
+            ],
+            "acceptance_criteria": [
+                "Maaş eşiği kontrolü doğru",
+                "Eksik belge uyarısı çalışıyor",
+                "Akış sonuna kadar gidilebiliyor"
+            ],
+            "risks": [
+                "Yasal parametrelerin yanlış girilmesi"
+            ],
+            "review_checklist": [
+                "legal: thresholds verified",
+                "i18n: keys present"
+            ]
+        },
+        {
+            "id": "epic-5",
+            "title": "Housing Copilot",
+            "description": "WG-Gesucht ve ImmoScout için güvenli link üretici (URL Generator) ve dolandırıcılık tespit (Scam Detector) modüllerinin geliştirilmesi.",
+            "deliverables": [
+                "src/features/housing/LinkGenerator.ts",
+                "src/features/housing/ScamDetector.ts",
+                "src/components/HousingSearch.tsx"
+            ],
+            "db_migrations": [],
+            "api_changes": [],
+            "ui_changes": [
+                "src/pages/Housing.tsx"
+            ],
+            "tests": [
+                "unit:src/features/housing/ScamDetector.test.ts"
+            ],
+            "acceptance_criteria": [
+                "Linkler doğru filtrelenmiş sayfaya gidiyor",
+                "Scam metinleri tespit ediliyor"
+            ],
+            "risks": [
+                "3. parti sitelerin URL yapısını değiştirmesi"
+            ],
+            "review_checklist": [
+                "security: no scraping",
+                "ux: clear redirection"
+            ]
+        },
+        {
+            "id": "epic-6",
+            "title": "AI Assistant (RAG)",
+            "description": "Supabase Edge Functions üzerinde çalışan, pgvector destekli ve RAG mimarisine sahip yapay zeka asistanının entegrasyonu.",
+            "deliverables": [
+                "supabase/functions/chat/index.ts",
+                "src/features/ai/ChatInterface.tsx",
+                "scripts/ingest_docs.js"
+            ],
+            "db_migrations": [
+                "supabase/migrations/20251125_vector_store.sql"
+            ],
+            "api_changes": [
+                {
+                    "method": "POST",
+                    "path": "/functions/v1/chat",
+                    "purpose": "AI Chat Completion"
+                }
+            ],
+            "ui_changes": [
+                "src/components/ChatWidget.tsx"
+            ],
+            "tests": [
+                "unit:supabase/functions/chat/test.ts"
+            ],
+            "acceptance_criteria": [
+                "Sorulara bağlam içi cevap veriliyor",
+                "PII filtreleniyor",
+                "Rate limit çalışıyor"
+            ],
+            "risks": [
+                "OpenAI maliyetleri, Halüsinasyon riski"
+            ],
+            "review_checklist": [
+                "security: PII redaction",
+                "performance: latency"
+            ]
+        }
+    ],
+    "ci_cd_and_release": [
+        "Branching: feat/<epic-id>-<desc>, fix/<issue-id>",
+        "PR Requirements: Conventional Commits, CI Pass, 1 Approval",
+        "Staging: Her PR otomatik olarak preview ortamına (Vercel/Netlify) deploy edilir.",
+        "Rollback: 'git revert' ve 'supabase db reset' (dev) veya down migration (prod)."
+    ],
+    "security_and_compliance": [
+        "GDPR: Kullanıcı verileri şifreli, PII temizlenmeden AI'a gönderilmez.",
+        "RLS: 'security_invoker' ile View güvenliği, her tablo için 'auth.uid() = user_id' politikası.",
+        "Audit: Kritik işlemler (başvuru silme, belge yükleme) loglanır."
+    ],
+    "observability": [
+        "Metrics: Error Rate (Sentry), API Latency (Supabase Dashboard).",
+        "Alerts: Edge Function hataları ve anormal trafik artışı için e-posta uyarısı."
+    ],
+    "quality_gates": [
+        "Unit Test Coverage: >80% (yeni mantık için)",
+        "No 'any' types allowed (TypeScript strict)",
+        "Lighthouse Performance Score: >90 (Mobile)"
+    ],
+    "migration_plan": [
+        "1. Local: 'supabase migration up' ile test et.",
+        "2. CI: Migration scriptlerini lint et.",
+        "3. Prod: Bakım penceresinde uygula.",
+        "4. Rollback: Sorun çıkarsa down migration çalıştır."
+    ],
+    "deliverables_and_artifacts": [
+        "ADRs",
+        "walkthrough.md",
+        "Migration SQLs",
+        "Test Reports"
+    ]
+}

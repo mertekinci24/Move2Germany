@@ -5,8 +5,10 @@ import { CreateTopic } from '../community/CreateTopic';
 import { Topic } from '../../lib/community';
 import { Users, MessageCircle, MessageSquare } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useI18n } from '../../contexts/I18nContext';
 
 export function CommunityView() {
+    const { t } = useI18n();
     const [view, setView] = useState<'list' | 'detail'>('list');
     const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
     const [showCreate, setShowCreate] = useState(false);
@@ -36,7 +38,7 @@ export function CommunityView() {
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-3xl font-bold text-gray-900 flex items-center">
                     <Users className="w-8 h-8 mr-3 text-blue-600" />
-                    Community
+                    {t('community.title')}
                 </h1>
 
                 <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
@@ -48,7 +50,7 @@ export function CommunityView() {
                         )}
                     >
                         <MessageSquare className="w-4 h-4 mr-2" />
-                        Forum
+                        {t('community.tabs.forum')}
                     </button>
                     <button
                         onClick={() => setActiveTab('chat')}
@@ -58,7 +60,7 @@ export function CommunityView() {
                         )}
                     >
                         <MessageCircle className="w-4 h-4 mr-2" />
-                        City Chat
+                        {t('community.tabs.chat')}
                     </button>
                 </div>
             </div>
@@ -77,9 +79,9 @@ export function CommunityView() {
                 ) : (
                     <div className="h-full flex flex-col items-center justify-center bg-white rounded-lg shadow-sm border border-dashed border-gray-300 text-center p-8">
                         <MessageCircle className="w-16 h-16 text-blue-200 mb-4" />
-                        <h3 className="text-xl font-semibold text-gray-900">City Chat Coming Soon</h3>
+                        <h3 className="text-xl font-semibold text-gray-900">{t('community.chat.comingSoon')}</h3>
                         <p className="text-gray-500 max-w-md mt-2">
-                            Connect with other expats in your city in real-time. We are putting the finishing touches on this feature.
+                            {t('community.chat.desc')}
                         </p>
                     </div>
                 )}

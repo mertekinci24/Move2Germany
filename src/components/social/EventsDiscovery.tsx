@@ -5,9 +5,11 @@ import { Calendar, MapPin, ExternalLink, Ticket } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { Skeleton } from '../ui/skeleton';
 import { toast } from 'sonner';
+import { useI18n } from '../../contexts/I18nContext';
 
 export function EventsDiscovery() {
     const { user } = useAuth();
+    const { t } = useI18n();
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -45,8 +47,8 @@ export function EventsDiscovery() {
         return (
             <div className="text-center py-12 bg-white rounded-lg shadow-sm border border-dashed border-gray-300">
                 <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900">No upcoming events</h3>
-                <p className="text-gray-500 mt-1">Check back later for social gatherings and workshops.</p>
+                <h3 className="text-lg font-medium text-gray-900">{t('events.noEvents')}</h3>
+                <p className="text-gray-500 mt-1">{t('events.noEventsDesc')}</p>
             </div>
         );
     }
@@ -71,12 +73,12 @@ export function EventsDiscovery() {
 
                         <div className="flex items-start text-sm text-gray-600">
                             <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
-                            <span className="line-clamp-1">{event.venue_name || 'Online'}</span>
+                            <span className="line-clamp-1">{event.venue_name || t('events.online')}</span>
                         </div>
 
                         <div className="flex items-center text-sm text-gray-600">
                             <Ticket className="w-4 h-4 mr-2 flex-shrink-0" />
-                            <span>{event.is_free ? 'Free' : `${event.price_min || ''} - ${event.price_max || ''} ${event.currency}`}</span>
+                            <span>{event.is_free ? t('events.free') : `${event.price_min || ''} - ${event.price_max || ''} ${event.currency}`}</span>
                         </div>
 
                         {event.description && (
@@ -93,11 +95,11 @@ export function EventsDiscovery() {
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center w-full px-4 py-2 bg-gray-50 text-blue-600 rounded-md hover:bg-blue-50 transition-colors font-medium text-sm border border-gray-200 hover:border-blue-200"
                                 >
-                                    View Details <ExternalLink className="w-4 h-4 ml-2" />
+                                    {t('events.viewDetails')} <ExternalLink className="w-4 h-4 ml-2" />
                                 </a>
                             ) : (
                                 <button disabled className="w-full px-4 py-2 bg-gray-100 text-gray-400 rounded-md text-sm font-medium cursor-not-allowed">
-                                    Details Unavailable
+                                    {t('events.detailsUnavailable')}
                                 </button>
                             )}
                         </div>

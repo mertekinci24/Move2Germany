@@ -1,4 +1,4 @@
-# Move2Germany V1
+# Move2Germany Enterprise Complete (v1.0.0)
 
 A comprehensive web application to help international students and young expats navigate their first 90 days in Germany. The platform provides a personalized task management system, AI assistance, and structured guidance across Housing, Bureaucracy, Work, and Social modules.
 
@@ -75,7 +75,15 @@ VITE_GEMINI_API_KEY=your_gemini_api_key
 2. Create a new API key
 3. Copy the key to your `.env` file
 
-### 3. Database Setup
+### 3. Data Ingestion (Enterprise Knowledge Base)
+
+Initialize the AI knowledge base with the latest research data:
+
+```bash
+npm run ingest
+```
+
+### 4. Database Setup
 
 The database schema is already applied via Supabase migrations. The following tables are created:
 

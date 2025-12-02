@@ -1,6 +1,7 @@
 import tasksConfig from '../../config/move2germany_tasks_v1.json';
 import tasksConfigEn from '../../config/move2germany_tasks_en_v1.json';
 import tasksConfigAr from '../../config/move2germany_tasks_ar_v1.json';
+import tasksConfigDe from '../../config/move2germany_tasks_de_v1.json';
 import actionBlocksConfig from '../../config/action_blocks_v1.json';
 import housingProvidersConfig from '../../config/housing_providers.json';
 import journeyPhasesConfig from '../config/journey_phases_v1.json';
@@ -214,6 +215,8 @@ class ConfigLoader {
       overlayTasks = tasksConfigEn as TaskOverlay[];
     } else if (locale === 'ar') {
       overlayTasks = tasksConfigAr as TaskOverlay[];
+    } else if (locale === 'de') {
+      overlayTasks = tasksConfigDe as TaskOverlay[];
     } else {
       return this.config.tasks;
     }

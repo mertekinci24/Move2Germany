@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, parseISO } from 'date-fns';
+import { enUS, tr, ar } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight, CheckCircle2, MapPin, Calendar as CalendarIcon } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { getTasksWithStatus, type TaskWithStatus } from '../../lib/tasks';
 import { getEvents, type Event } from '../../lib/events';
+import { getNotes, type Note } from '../../lib/notes';
+import { FileText } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { toast } from 'sonner';
 import { useI18n } from '../../contexts/I18nContext';
@@ -15,9 +18,11 @@ import { Badge } from '../ui/Badge';
 export function CalendarView() {
     const { user } = useAuth();
     const { t, locale } = useI18n();
+    const dateFnsLocale = locale === 'tr' ? tr : locale === 'ar' ? ar : enUS;
     const [currentDate, setCurrentDate] = useState(new Date());
     const [tasks, setTasks] = useState<TaskWithStatus[]>([]);
     const [events, setEvents] = useState<Event[]>([]);
+    const [notes, setNotes] = useState<Note[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -25,12 +30,14 @@ export function CalendarView() {
         async function loadData() {
             if (!user) return;
             try {
-                const [tasksData, eventsData] = await Promise.all([
+                const [tasksData, eventsData, notesData] = await Promise.all([
                     getTasksWithStatus(user.id, { locale }),
-                    getEvents(user.primaryCityId || 'berlin')
+                    getEvents(user.primaryCityId || 'berlin'),
+                    getNotes(user.id)
                 ]);
                 setTasks(tasksData);
                 setEvents(eventsData);
+                setNotes(notesData);
             } catch (error) {
                 console.error('Failed to load calendar data:', error);
                 toast.error(t('calendar.error'));
@@ -59,7 +66,12 @@ export function CalendarView() {
             return isSameDay(date, day);
         });
 
-        return { tasks: dayTasks, events: dayEvents };
+        const dayNotes = notes.filter(n => {
+            const date = n.event_date ? parseISO(n.event_date) : null;
+            return date && isSameDay(date, day);
+        });
+
+        return { tasks: dayTasks, events: dayEvents, notes: dayNotes };
     };
 
     const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
@@ -89,7 +101,7 @@ export function CalendarView() {
                             <ChevronLeft className="w-4 h-4" />
                         </Button>
                         <span className="text-sm font-medium min-w-[120px] text-center">
-                            {format(currentDate, 'MMMM yyyy')}
+                            {format(currentDate, 'MMMM yyyy', { locale: dateFnsLocale })}
                         </span>
                         <Button variant="ghost" size="sm" onClick={nextMonth} className="h-8 w-8 p-0">
                             <ChevronRight className="w-4 h-4" />
@@ -106,15 +118,18 @@ export function CalendarView() {
                 {/* Calendar Grid */}
                 <Card className="flex-1 flex flex-col p-0 overflow-hidden border-0 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800">
                     <div className="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
-                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
-                            <div key={day} className="py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                {day}
+                        {eachDayOfInterval({
+                            start: startOfWeek(currentDate, { weekStartsOn: 1 }),
+                            end: endOfWeek(currentDate, { weekStartsOn: 1 })
+                        }).map(day => (
+                            <div key={day.toString()} className="py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                {format(day, 'EEE', { locale: dateFnsLocale })}
                             </div>
                         ))}
                     </div>
                     <div className="flex-1 grid grid-cols-7 auto-rows-fr bg-white dark:bg-slate-950">
                         {calendarDays.map((day, idx) => {
-                            const { tasks, events } = getDayContent(day);
+                            const { tasks, events, notes } = getDayContent(day);
                             const isSelected = selectedDate && isSameDay(day, selectedDate);
                             const isCurrentMonth = isSameMonth(day, monthStart);
                             const isToday = isSameDay(day, new Date());
@@ -139,10 +154,11 @@ export function CalendarView() {
                                         )}>
                                             {format(day, 'd')}
                                         </span>
-                                        {(tasks.length > 0 || events.length > 0) && (
+                                        {(tasks.length > 0 || events.length > 0 || notes.length > 0) && (
                                             <div className="flex space-x-1">
                                                 {tasks.length > 0 && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />}
                                                 {events.length > 0 && <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />}
+                                                {notes.length > 0 && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
                                             </div>
                                         )}
                                     </div>
@@ -157,9 +173,15 @@ export function CalendarView() {
                                                 {event.title}
                                             </div>
                                         ))}
-                                        {(tasks.length + events.length) > 4 && (
+                                        {notes.slice(0, 2).map(note => (
+                                            <div key={note.id} className="text-[10px] truncate px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-100 dark:border-amber-900/30">
+                                                <FileText className="w-2 h-2 inline mr-1" />
+                                                {note.title}
+                                            </div>
+                                        ))}
+                                        {(tasks.length + events.length + notes.length) > 4 && (
                                             <div className="text-[10px] text-slate-400 pl-1">
-                                                +{(tasks.length + events.length) - 4} more
+                                                +{(tasks.length + events.length + notes.length) - 4} more
                                             </div>
                                         )}
                                     </div>
@@ -250,11 +272,39 @@ export function CalendarView() {
                                         </div>
                                     )}
                                 </div>
+
+                                <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+                                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center justify-between">
+                                        {t('common.notes')}
+                                        <span className="text-[10px] bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded-full text-slate-500">
+                                            {selectedDayContent?.notes.length || 0}
+                                        </span>
+                                    </h3>
+                                    {selectedDayContent?.notes.length === 0 ? (
+                                        <p className="text-sm text-slate-400 italic pl-2 border-l-2 border-slate-100 dark:border-slate-800">
+                                            {t('calendar.noEvents')}
+                                        </p>
+                                    ) : (
+                                        <div className="space-y-2">
+                                            {selectedDayContent?.notes.map(note => (
+                                                <div key={note.id} className="p-3 rounded-lg bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 hover:border-amber-200 dark:hover:border-amber-800 transition-colors">
+                                                    <p className="text-sm font-medium text-amber-900 dark:text-amber-300 flex items-center gap-2">
+                                                        <FileText className="w-3 h-3" />
+                                                        {note.title}
+                                                    </p>
+                                                    <div className="mt-1 text-xs text-amber-700 dark:text-amber-400 line-clamp-2">
+                                                        {note.content}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </>
                         )}
                     </div>
                 </Card>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

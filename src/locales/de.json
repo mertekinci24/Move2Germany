@@ -19,6 +19,9 @@
     "bureaucracy": "Bürokratie",
     "work": "Arbeit",
     "social": "Soziales",
+    "notes": "Notizen",
+    "calendar": "Kalender",
+    "community": "Community",
     "settings": "Einstellungen"
   },
   "auth": {

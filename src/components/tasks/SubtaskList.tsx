@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { CheckCircle2, Circle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { CheckCircle2, Circle, ArrowRight, ChevronDown, ChevronUp, Plus, X } from 'lucide-react';
 import { Task } from '../../lib/config';
-import { UserTask } from '../../lib/tasks';
+import { UserTask, UserSubtask, getUserSubtasks, createUserSubtask, updateUserSubtask, deleteUserSubtask } from '../../lib/tasks';
+import { useAuth } from '../../contexts/AuthContext';
 import { useI18n } from '../../contexts/I18nContext';
+import externalServicesConfig from '../../../config/external_services.json';
 
 type SubtaskListProps = {
     task: Task;
@@ -14,16 +16,89 @@ type SubtaskListProps = {
 };
 
 export function SubtaskList({ task, userTask, linkedSubtaskStatus, onToggle, onNavigate, onMetadataChange }: SubtaskListProps) {
+    const { user } = useAuth();
     const { t } = useI18n();
+    const [userSubtasks, setUserSubtasks] = useState<UserSubtask[]>([]);
+    const [isAdding, setIsAdding] = useState(false);
+    const [newSubtaskTitle, setNewSubtaskTitle] = useState('');
+    const [saving, setSaving] = useState(false);
+
     const subtasks = task.subtasks || [];
 
-    if (subtasks.length === 0) return null;
+    // Fetch user subtasks
+    useEffect(() => {
+        if (user) {
+            loadUserSubtasks();
+        }
+    }, [user, task.id]);
+
+    async function loadUserSubtasks() {
+        if (!user) return;
+        try {
+            const loaded = await getUserSubtasks(user.id, task.id);
+            setUserSubtasks(loaded);
+        } catch (error) {
+            console.error('Failed to load user subtasks:', error);
+        }
+    }
+
+    async function handleAddSubtask() {
+        if (!user || !newSubtaskTitle.trim()) return;
+
+        setSaving(true);
+        try {
+            const newSubtask = await createUserSubtask(user.id, task.id, newSubtaskTitle.trim());
+            setUserSubtasks([...userSubtasks, newSubtask]); // Optimistic update
+            setNewSubtaskTitle('');
+            setIsAdding(false);
+        } catch (error) {
+            console.error('Failed to create subtask:', error);
+        } finally {
+            setSaving(false);
+        }
+    }
+
+    async function handleToggleUserSubtask(subtask: UserSubtask) {
+        // Optimistic update
+        setUserSubtasks(prev => prev.map(s =>
+            s.id === subtask.id ? { ...s, isCompleted: !s.isCompleted } : s
+        ));
+
+        try {
+            await updateUserSubtask(subtask.id, { isCompleted: !subtask.isCompleted });
+        } catch (error) {
+            console.error('Failed to toggle subtask:', error);
+            // Revert on error
+            setUserSubtasks(prev => prev.map(s =>
+                s.id === subtask.id ? { ...s, isCompleted: !s.isCompleted } : s
+            ));
+        }
+    }
+
+    async function handleDeleteUserSubtask(id: string) {
+        if (!confirm(t('tasks.subtask.custom.deleteConfirm'))) return;
+
+        // Optimistic deletion
+        setUserSubtasks(prev => prev.filter(s => s.id !== id));
+
+        try {
+            await deleteUserSubtask(id);
+        } catch (error) {
+            console.error('Failed to delete subtask:', error);
+            // Reload on error
+            loadUserSubtasks();
+        }
+    }
+
+    // if (subtasks.length === 0 && userSubtasks.length === 0 && !isAdding) return null;
 
     return (
         <div className="space-y-3">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
                 {t('tasks.detail.subtasks')}
             </h3>
+
+            {/* Canonical Subtasks */}
             <div className="space-y-2">
                 {subtasks.map(subtask => (
                     <SubtaskItem
@@ -38,8 +113,102 @@ export function SubtaskList({ task, userTask, linkedSubtaskStatus, onToggle, onN
                     />
                 ))}
             </div>
+
+            {/* User Custom Subtasks */}
+            {userSubtasks.length > 0 && (
+                <div className="mt-4 space-y-2">
+                    {userSubtasks.map(subtask => (
+                        <div
+                            key={subtask.id}
+                            className={`flex items-start p-3 rounded-lg border transition-all ${subtask.isCompleted
+                                ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'
+                                : 'bg-amber-50 dark:bg-amber-900/10 border-amber-200 dark:border-amber-800'
+                                }`}
+                        >
+                            <div
+                                onClick={() => handleToggleUserSubtask(subtask)}
+                                className={`mt-0.5 mr-3 flex-shrink-0 cursor-pointer ${subtask.isCompleted ? 'text-green-600 dark:text-green-400' : 'text-slate-400'
+                                    }`}
+                            >
+                                {subtask.isCompleted ? <CheckCircle2 className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
+                            </div>
+                            <div className="flex-1">
+                                <span className={`text-sm ${subtask.isCompleted
+                                    ? 'text-slate-600 dark:text-slate-400 line-through'
+                                    : 'text-slate-900 dark:text-white'
+                                    }`}>
+                                    {subtask.title}
+                                </span>
+                                <span className="ml-2 px-2 py-0.5 text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded">
+                                    {t('tasks.subtask.custom.badge')}
+                                </span>
+                            </div>
+                            <button
+                                onClick={() => handleDeleteUserSubtask(subtask.id)}
+                                className="ml-2 p-1 text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                title="Delete"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {/* Add Subtask Form */}
+            {isAdding ? (
+                <div className="mt-3 p-3 border border-indigo-200 dark:border-indigo-800 rounded-lg bg-indigo-50 dark:bg-indigo-900/20">
+                    <input
+                        type="text"
+                        value={newSubtaskTitle}
+                        onChange={(e) => setNewSubtaskTitle(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleAddSubtask();
+                            if (e.key === 'Escape') { setIsAdding(false); setNewSubtaskTitle(''); }
+                        }}
+                        placeholder={t('tasks.subtask.custom.placeholder')}
+                        className="w-full px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
+                        autoFocus
+                        disabled={saving}
+                    />
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleAddSubtask}
+                            disabled={saving || !newSubtaskTitle.trim()}
+                            className="px-3 py-1.5 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                            {saving ? t('common.loading') : t('tasks.subtask.custom.save')}
+                        </button>
+                        <button
+                            onClick={() => { setIsAdding(false); setNewSubtaskTitle(''); }}
+                            disabled={saving}
+                            className="px-3 py-1.5 text-sm bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+                        >
+                            {t('tasks.subtask.custom.cancel')}
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <button
+                    onClick={() => setIsAdding(true)}
+                    className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-400 hover:border-indigo-400 dark:hover:border-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                >
+                    <Plus className="w-4 h-4" />
+                    <span className="text-sm font-medium">{t('tasks.subtask.custom.add')}</span>
+                </button>
+            )}
         </div>
     );
+}
+
+// Helper function to find service across all categories
+function findService(providerId: string) {
+    const categories = (externalServicesConfig as any).categories || {};
+    for (const category of Object.values(categories)) {
+        const service = (category as any).services?.find((s: any) => s.id === providerId);
+        if (service) return service;
+    }
+    return null;
 }
 
 function SubtaskItem({
@@ -71,7 +240,7 @@ function SubtaskItem({
                         {subtask.title}
                     </p>
                     <div className="flex items-center mt-1 text-xs text-blue-600 dark:text-blue-400 font-medium">
-                        <span>Go to task</span>
+                        <span>{t('tasks.subtask.linked.goToTask')}</span>
                         <ArrowRight className="w-3 h-3 ml-1" />
                     </div>
                 </div>
@@ -113,7 +282,7 @@ function SubtaskItem({
                                         onMetadataChange?.(subtask.criteriaKey, { ...criteria, [field]: newVal });
                                     }}
                                     className="w-full text-sm rounded-md border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white px-3 py-2 focus:ring-2 focus:ring-indigo-500"
-                                    placeholder={`Enter ${field}...`}
+                                    placeholder={t('tasks.subtask.formCriteria.placeholder', { field: field.replace(/([A-Z])/g, ' $1').trim() })}
                                 />
                             </div>
                         ))}
@@ -138,9 +307,22 @@ function SubtaskItem({
                 <div className="pl-8 space-y-2">
                     {subtask.providers?.map((providerId: string) => {
                         const isProviderDone = actionProgress[providerId] || false;
+                        const platform = findService(providerId);
                         return (
-                            <div key={providerId} className="flex items-center justify-between text-sm">
-                                <span className="text-slate-600 dark:text-slate-400 capitalize">{providerId.replace('_', ' ')}</span>
+                            <div key={providerId} className="flex items-center justify-between text-sm gap-2">
+                                <div className="flex-1 flex items-center gap-2">
+                                    <span className="text-slate-600 dark:text-slate-400 capitalize">{providerId.replace(/_/g, ' ')}</span>
+                                    {platform && (
+                                        <a
+                                            href={platform.baseUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-2 py-1 text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded transition-colors"
+                                        >
+                                            {t('tasks.subtask.externalAction.visit')} →
+                                        </a>
+                                    )}
+                                </div>
                                 <label className="flex items-center space-x-2 cursor-pointer">
                                     <input
                                         type="checkbox"
@@ -150,7 +332,7 @@ function SubtaskItem({
                                         }}
                                         className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                                     />
-                                    <span className="text-xs text-slate-500">Signed up</span>
+                                    <span className="text-xs text-slate-500">{t('tasks.subtask.externalAction.markDone')}</span>
                                 </label>
                             </div>
                         );

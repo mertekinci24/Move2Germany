@@ -5,6 +5,7 @@ import { TaskCard } from '../tasks/TaskCard';
 import { TaskDetail } from '../tasks/TaskDetail';
 import { configLoader } from '../../lib/config';
 import { useI18n } from '../../contexts/I18nContext';
+import { useJourneyPhase } from '../../contexts/JourneyPhaseContext';
 import { PageHeader } from '../ui/PageHeader';
 import { Card } from '../ui/Card';
 import { EmptyState } from '../ui/EmptyState';
@@ -13,6 +14,7 @@ import { CheckCircle2, Clock, AlertCircle, Layout } from 'lucide-react';
 export function OverviewView() {
   const { user } = useAuth();
   const { t, locale } = useI18n();
+  const { currentPhase } = useJourneyPhase();
   const [tasks, setTasks] = useState<TaskWithStatus[]>([]);
   const [selectedTask, setSelectedTask] = useState<TaskWithStatus | null>(null);
 
@@ -64,7 +66,7 @@ export function OverviewView() {
         action={
           <div className="hidden md:flex items-center px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium border border-indigo-100 dark:border-indigo-800">
             <Clock className="w-4 h-4 mr-2" />
-            {t('journey.currentPhase')}: {t(`timeWindows.${configLoader.getJourneyPhases().find(p => p.id === 'week_1')?.id || 'pre_arrival'}`)}
+            {t('journey.currentPhase')}: {t(`timeWindows.${currentPhase.id}`)}
           </div>
         }
       />

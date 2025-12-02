@@ -24,41 +24,45 @@
   "timeWindows": [
     {
       "id": "pre_arrival",
-      "label": "Pre-arrival (0–3 ay önce)"
+      "label": "Pre-arrival (0-3 months before)"
     },
     {
       "id": "week_1",
-      "label": "1. hafta"
+      "label": "Week 1"
     },
     {
       "id": "weeks_2_4",
-      "label": "2–4. hafta"
+      "label": "Weeks 2-4"
     },
     {
       "id": "month_2",
-      "label": "2. ay"
+      "label": "Month 2"
     },
     {
       "id": "month_3",
-      "label": "3. ay"
+      "label": "Month 3"
     }
   ],
   "modules": [
     {
       "id": "housing",
-      "label": "Konut"
+      "label": "Housing",
+      "icon": "home"
     },
     {
       "id": "bureaucracy",
-      "label": "Bürokrasi"
+      "label": "Bureaucracy",
+      "icon": "file-text"
     },
     {
       "id": "work",
-      "label": "İş"
+      "label": "Work",
+      "icon": "briefcase"
     },
     {
       "id": "social",
-      "label": "Sosyal"
+      "label": "Social",
+      "icon": "users"
     }
   ],
   "tasks": [
@@ -82,7 +86,14 @@
         {
           "id": "define_budget",
           "title": "Bütçenizi ve kriterlerinizi belirleyin",
-          "required": true
+          "required": true,
+          "type": "form_criteria",
+          "criteriaKey": "housing_preferences",
+          "fields": [
+            "maxRent",
+            "minSize",
+            "roomType"
+          ]
         },
         {
           "id": "prepare_documents",
@@ -94,7 +105,14 @@
         {
           "id": "create_accounts",
           "title": "Konut platformlarında hesap oluşturun",
-          "required": true
+          "required": true,
+          "type": "external_action",
+          "actionType": "housing_platform_signup",
+          "providers": [
+            "wg_gesucht",
+            "immoscout24",
+            "ebay_kleinanzeigen"
+          ]
         },
         {
           "id": "apply_listings",
@@ -171,6 +189,20 @@
         "munich",
         "frankfurt",
         "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "compare_providers",
+          "title": "Sağlık sigortası sağlayıcılarını karşılaştırın",
+          "type": "external_action",
+          "actionType": "insurance_comparison",
+          "providers": [
+            "tk_health",
+            "aok_health",
+            "dak_health"
+          ],
+          "required": true
+        }
       ]
     },
     {
@@ -188,6 +220,21 @@
         "munich",
         "frankfurt",
         "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "create_profiles",
+          "title": "İş platformlarında profil oluşturun",
+          "type": "external_action",
+          "actionType": "job_platform_signup",
+          "providers": [
+            "stepstone",
+            "linkedin",
+            "indeed",
+            "arbeitsagentur"
+          ],
+          "required": true
+        }
       ]
     },
     {
@@ -225,7 +272,19 @@
         "frankfurt",
         "hamburg"
       ],
-      "cityNote": "Berlin'de randevular en az 4-6 hafta önce alınmalı."
+      "cityNote": "Berlin'de randevular en az 4-6 hafta önce alınmalı.",
+      "subtasks": [
+        {
+          "id": "book_appointment",
+          "title": "Bürgeramt randevusu online alın",
+          "type": "external_action",
+          "actionType": "government_appointment",
+          "providers": [
+            "buergeramt_termin"
+          ],
+          "required": true
+        }
+      ]
     },
     {
       "id": "saglik-sigortasini-baslat",
@@ -263,6 +322,20 @@
         "munich",
         "frankfurt",
         "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "choose_bank",
+          "title": "Banka seçin ve online başvuru yapın",
+          "type": "external_action",
+          "actionType": "bank_signup",
+          "providers": [
+            "n26",
+            "deutsche_bank",
+            "sparkasse"
+          ],
+          "required": true
+        }
       ]
     },
     {
@@ -335,7 +408,21 @@
         "frankfurt",
         "hamburg"
       ],
-      "cityNote": "Berlin'de İngilizce etkinlik daha fazla."
+      "cityNote": "Berlin'de İngilizce etkinlik daha fazla.",
+      "subtasks": [
+        {
+          "id": "join_communities",
+          "title": "Expat topluluklarına katılın",
+          "type": "external_action",
+          "actionType": "social_platform_join",
+          "providers": [
+            "meetup",
+            "internations",
+            "facebook_groups"
+          ],
+          "required": true
+        }
+      ]
     },
     {
       "id": "anmeldung-islemlerini-tamamla",
@@ -837,6 +924,313 @@
         "berlin"
       ],
       "cityNote": "Berlin expat/öğrenci forumu çok aktif."
+    },
+    {
+      "id": "join_expat_communities",
+      "timeWindow": "week_1",
+      "module": "social",
+      "title": "Expat topluluklarına katıl",
+      "description": "Diğer expatlarla tanışmak ve destek ağı oluşturmak için topluluklara katıl.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "join_platforms",
+          "title": "Topluluk platformlarına üye olun",
+          "type": "external_action",
+          "actionType": "social_platform_join",
+          "providers": [
+            "meetup",
+            "internations",
+            "facebook_groups"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "practice_language",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Dil pratiği yap",
+      "description": "Dil değişim partnerleri bularak Almanca pratiği yap.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "language_apps",
+          "title": "Dil öğrenme uygulamalarını kullanın",
+          "type": "external_action",
+          "actionType": "language_practice",
+          "providers": [
+            "tandem",
+            "babbel",
+            "duolingo"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "discover_local_events",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Yerel etkinlikleri keşfet",
+      "description": "Konserler, festivaller ve yerel buluşmalar için etkinlik takvimlerini kontrol et.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "check_events",
+          "title": "Etkinlik platformlarını inceleyin",
+          "type": "external_action",
+          "actionType": "event_discovery",
+          "providers": [
+            "eventbrite",
+            "facebook_groups",
+            "meetup"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rathaus-portalindan-dijital-randevu",
+      "timeWindow": "week_1",
+      "module": "bureaucracy",
+      "title": "Rathaus portalından dijital randevu",
+      "description": "Anmeldung için stadt.rathaus veya stadtverwaltung portalını kullan.",
+      "dependencies": [
+        "kira-sozlesmesi-imzala"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "munich"
+      ],
+      "cityNote": "Munich'de bazı ilçelerde dijital başvuru yok."
+    },
+    {
+      "id": "finans-bankacilik-staj-basvurusu",
+      "timeWindow": "weeks_2_4",
+      "module": "work",
+      "title": "Finans/Bankacılık staj başvurusu",
+      "description": "Frankfurt'ta büyük bankalarda staj ilanlarını takip et, başvuru yap.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "frankfurt"
+      ],
+      "cityNote": "Frankfurt'ta finans iş ilanı yoğun."
+    },
+    {
+      "id": "ingilizce-sosyal-grup-bul",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "İngilizce sosyal grup bul",
+      "description": "Hamburg'da expat ve İngilizce konuşulan sosyal gruplara katıl.",
+      "dependencies": [
+        "yeni-arkadaslar-edin"
+      ],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "hamburg"
+      ],
+      "cityNote": "Hamburg'da internasyonal gruplar aktif."
+    },
+    {
+      "id": "elektronik-anmeldung-dene",
+      "timeWindow": "month_2",
+      "module": "bureaucracy",
+      "title": "Elektronik Anmeldung dene",
+      "description": "Berlin'de elektronik Anmeldung ile online başvurunu tamamla.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "once",
+      "cityScope": [
+        "berlin"
+      ],
+      "cityNote": "Berlin'de dijital proses yaygınlaştı."
+    },
+    {
+      "id": "erasmus-expat-kulubune-katil",
+      "timeWindow": "month_2",
+      "module": "social",
+      "title": "Erasmus/expat kulübüne katıl",
+      "description": "RWTH ve FH'nin expat/erasmus topluluklarına üyelik başlat.",
+      "dependencies": [
+        "kulup-gruba-katil"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen"
+      ],
+      "cityNote": "Aachen'de bu etkinlikler fiziksel buluşmalı."
+    },
+    {
+      "id": "kira-zam-bildirimlerini-izle",
+      "timeWindow": "month_3",
+      "module": "housing",
+      "title": "Kira/Zam bildirimlerini izle",
+      "description": "Munich'te yüksek kira artışı/gider zammı olmuşsa yeni WG ilanlarını ara.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "munich"
+      ],
+      "cityNote": "Munich'de zam dönemleri sık."
+    },
+    {
+      "id": "expat-foruma-aktif-katilim",
+      "timeWindow": "month_3",
+      "module": "social",
+      "title": "Expat foruma aktif katılım",
+      "description": "Berlin'deki expat ve öğrenci forumlarında soru/cevap paylaş.",
+      "dependencies": [
+        "aktif-sosyal-katilim"
+      ],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "berlin"
+      ],
+      "cityNote": "Berlin expat/öğrenci forumu çok aktif."
+    },
+    {
+      "id": "join_expat_communities",
+      "timeWindow": "week_1",
+      "module": "social",
+      "title": "Expat topluluklarına katıl",
+      "description": "Diğer expatlarla tanışmak ve destek ağı oluşturmak için topluluklara katıl.",
+      "dependencies": [],
+      "importance": "high",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "join_platforms",
+          "title": "Topluluk platformlarına üye olun",
+          "type": "external_action",
+          "actionType": "social_platform_join",
+          "providers": [
+            "meetup",
+            "internations",
+            "facebook_groups"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "practice_language",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Dil pratiği yap",
+      "description": "Dil değişim partnerleri bularak Almanca pratiği yap.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "language_apps",
+          "title": "Dil öğrenme uygulamalarını kullanın",
+          "type": "external_action",
+          "actionType": "language_practice",
+          "providers": [
+            "tandem",
+            "babbel",
+            "duolingo"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "discover_local_events",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Yerel etkinlikleri keşfet",
+      "description": "Konserler, festivaller ve yerel buluşmalar için etkinlik takvimlerini kontrol et.",
+      "dependencies": [],
+      "importance": "medium",
+      "repeat": "recurring",
+      "cityScope": [
+        "aachen",
+        "berlin",
+        "munich",
+        "frankfurt",
+        "hamburg"
+      ],
+      "subtasks": [
+        {
+          "id": "check_events",
+          "title": "Etkinlik platformlarını inceleyin",
+          "type": "external_action",
+          "actionType": "event_discovery",
+          "providers": [
+            "eventbrite",
+            "facebook_groups",
+            "meetup"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "kulup-gruba-katil",
+      "timeWindow": "weeks_2_4",
+      "module": "social",
+      "title": "Bir kulübe/gruba katıl",
+      "description": "Meetup, Telegram, öğrenci kulüpleri veya sosyal etkinliklere göz at ve katılma isteği gönder.",
+      "dependencies": [
+        "kira-sozlesmesi-imzala"
+      ],
+      "importance": "high",
+      "repeat": "once",
+      "cityScope": [
+        "munich"
+      ],
+      "cityNote": "Munich'de bazı ilçelerde dijital başvuru yok."
     }
   ]
 }

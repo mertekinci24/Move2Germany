@@ -5,6 +5,7 @@ import { TaskCard } from '../tasks/TaskCard';
 import { TaskDetail } from '../tasks/TaskDetail';
 // import { configLoader } from '../../lib/config';
 import { EventsDiscovery } from '../social/EventsDiscovery';
+import { ScamDetector } from '../housing/ScamDetector';
 import { cn } from '../../lib/utils';
 import { useI18n } from '../../contexts/I18nContext';
 
@@ -22,7 +23,7 @@ export function ModuleView({ moduleId, cityId, timeWindowId, searchQuery }: Modu
   const [loading, setLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<TaskWithStatus | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [activeTab, setActiveTab] = useState<'tasks' | 'events'>('tasks');
+  const [activeTab, setActiveTab] = useState<'tasks' | 'events' | 'scam_detector'>('tasks');
 
   // const module = configLoader.getModule(moduleId);
 
@@ -93,6 +94,27 @@ export function ModuleView({ moduleId, cityId, timeWindowId, searchQuery }: Modu
               {t('calendar.events')}
             </button>
           </div>
+        ) : moduleId === 'housing' ? (
+          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+            <button
+              onClick={() => setActiveTab('tasks')}
+              className={cn(
+                "px-4 py-2 text-sm font-medium rounded-md transition-all",
+                activeTab === 'tasks' ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"
+              )}
+            >
+              {t('common.tasks')}
+            </button>
+            <button
+              onClick={() => setActiveTab('scam_detector')}
+              className={cn(
+                "px-4 py-2 text-sm font-medium rounded-md transition-all",
+                activeTab === 'scam_detector' ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"
+              )}
+            >
+              {t('scamDetector.tabName')}
+            </button>
+          </div>
         ) : (
           <select
             value={statusFilter}
@@ -110,6 +132,8 @@ export function ModuleView({ moduleId, cityId, timeWindowId, searchQuery }: Modu
 
       {moduleId === 'social' && activeTab === 'events' ? (
         <EventsDiscovery />
+      ) : moduleId === 'housing' && activeTab === 'scam_detector' ? (
+        <ScamDetector />
       ) : (
         <>
           <div className="bg-white p-4 rounded-lg shadow">

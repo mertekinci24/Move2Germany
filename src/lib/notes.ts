@@ -6,6 +6,7 @@ export type Note = {
   title: string;
   content: string;
   related_task_id?: string;
+  event_date?: string; // ISO string
   city_id?: string;
   module_id?: string;
   created_at: string;

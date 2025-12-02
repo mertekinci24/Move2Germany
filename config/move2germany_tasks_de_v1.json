@@ -1,0 +1,26 @@
+[
+    {
+        "id": "kira-oda-ilanlarini-takip-et",
+        "title": "Wohnungssuche beginnen",
+        "description": "Beginnen Sie Ihre Suche nach einer Unterkunft in Deutschland. Der Wohnungsmarkt kann sehr umkämpft sein.",
+        "cityNote": "In Berlin ist der Wohnungsmarkt besonders schwierig."
+    },
+    {
+        "id": "anmeldung-icin-randevu-al",
+        "title": "Anmeldung (Wohnsitz anmelden)",
+        "description": "Melden Sie Ihren Wohnsitz beim Bürgeramt an. Dies ist innerhalb von 14 Tagen nach Einzug erforderlich.",
+        "cityNote": "In Berlin müssen Sie oft Wochen im Voraus einen Termin buchen."
+    },
+    {
+        "id": "banka-hesabi-ac",
+        "title": "Bankkonto eröffnen",
+        "description": "Eröffnen Sie ein deutsches Bankkonto für Gehaltszahlungen und Mietzahlungen.",
+        "cityNote": "Viele Banken bieten Online-Eröffnungen an."
+    },
+    {
+        "id": "saglik-sigortasini-sec",
+        "title": "Krankenversicherung abschließen",
+        "description": "Eine Krankenversicherung ist in Deutschland gesetzlich vorgeschrieben.",
+        "cityNote": "Wählen Sie zwischen gesetzlicher und privater Versicherung."
+    }
+]

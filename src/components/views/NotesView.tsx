@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useI18n } from '../../contexts/I18nContext';
-import { Note, getNotes, createNote, updateNote, deleteNote } from '../../lib/notes';
+import { Note, getNotes, deleteNote } from '../../lib/notes';
 import { PageHeader } from '../ui/PageHeader';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
-import { Plus, Trash2, Save, X, Edit2, FileText } from 'lucide-react';
+import { Plus, Trash2, Edit2, FileText, X } from 'lucide-react';
 import { toast } from 'sonner';
+import { useLocation } from 'react-router-dom';
+import { NoteForm } from '../notes/NoteForm';
 
 interface NotesViewProps {
     userId: string;
@@ -14,17 +16,23 @@ interface NotesViewProps {
 
 export function NotesView({ userId }: NotesViewProps) {
     const { t } = useI18n();
+    const location = useLocation();
     const [notes, setNotes] = useState<Note[]>([]);
     const [loading, setLoading] = useState(true);
     const [editingNote, setEditingNote] = useState<Note | null>(null);
     const [isCreating, setIsCreating] = useState(false);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [saving, setSaving] = useState(false);
+    const [relatedTaskId, setRelatedTaskId] = useState('');
 
     useEffect(() => {
         loadNotes();
-    }, [userId]);
+
+        // Check for pre-filled task from navigation state
+        if (location.state?.relatedTaskId) {
+            setRelatedTaskId(location.state.relatedTaskId);
+            setIsCreating(true);
+            window.history.replaceState({}, document.title);
+        }
+    }, [userId, t]);
 
     async function loadNotes() {
         try {
@@ -36,40 +44,6 @@ export function NotesView({ userId }: NotesViewProps) {
             toast.error(t('notes.error.load'));
         } finally {
             setLoading(false);
-        }
-    }
-
-    async function handleSave() {
-        if (!title.trim()) {
-            toast.error(t('notes.error.titleRequired'));
-            return;
-        }
-
-        setSaving(true);
-        try {
-            if (editingNote) {
-                await updateNote(editingNote.id, { title, content });
-                toast.success(t('notes.success.updated'));
-            } else {
-                await createNote({
-                    user_id: userId,
-                    title,
-                    content,
-                    // tags: [] // Future: Add tags support
-                });
-                toast.success(t('notes.success.created'));
-            }
-
-            setTitle('');
-            setContent('');
-            setEditingNote(null);
-            setIsCreating(false);
-            loadNotes();
-        } catch (error) {
-            console.error('Error saving note:', error);
-            toast.error(t('notes.error.save'));
-        } finally {
-            setSaving(false);
         }
     }
 
@@ -92,23 +66,27 @@ export function NotesView({ userId }: NotesViewProps) {
 
     function startEdit(note: Note) {
         setEditingNote(note);
-        setTitle(note.title);
-        setContent(note.content || '');
         setIsCreating(false);
+        setRelatedTaskId('');
     }
 
     function startCreate() {
         setEditingNote(null);
-        setTitle('');
-        setContent('');
         setIsCreating(true);
+        setRelatedTaskId('');
     }
 
     function cancelEdit() {
         setEditingNote(null);
         setIsCreating(false);
-        setTitle('');
-        setContent('');
+        setRelatedTaskId('');
+    }
+
+    function handleSave() {
+        setEditingNote(null);
+        setIsCreating(false);
+        setRelatedTaskId('');
+        loadNotes();
     }
 
     return (
@@ -167,7 +145,7 @@ export function NotesView({ userId }: NotesViewProps) {
                                         </button>
                                     </div>
                                     <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 h-10">
-                                        {note.content || 'No content'}
+                                        {note.content || t('common.noContent')}
                                     </p>
                                     <div className="mt-2 text-xs text-slate-400">
                                         {new Date(note.updated_at).toLocaleDateString()}
@@ -195,42 +173,13 @@ export function NotesView({ userId }: NotesViewProps) {
                                 </Button>
                             </div>
 
-                            <div className="space-y-4 flex-1 flex flex-col">
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                                        {t('notes.noteTitle')}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={title}
-                                        onChange={(e) => setTitle(e.target.value)}
-                                        placeholder={t('notes.titlePlaceholder')}
-                                        className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                    />
-                                </div>
-
-                                <div className="flex-1 flex flex-col">
-                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                                        {t('notes.noteContent')}
-                                    </label>
-                                    <textarea
-                                        value={content}
-                                        onChange={(e) => setContent(e.target.value)}
-                                        placeholder={t('notes.contentPlaceholder')}
-                                        className="w-full flex-1 p-3 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none min-h-[300px]"
-                                    />
-                                </div>
-
-                                <div className="flex justify-end pt-2">
-                                    <Button
-                                        onClick={handleSave}
-                                        isLoading={saving}
-                                        leftIcon={<Save className="w-4 h-4" />}
-                                    >
-                                        {t('common.save')}
-                                    </Button>
-                                </div>
-                            </div>
+                            <NoteForm
+                                userId={userId}
+                                initialData={editingNote}
+                                relatedTaskId={relatedTaskId}
+                                onSave={handleSave}
+                                onCancel={cancelEdit}
+                            />
                         </Card>
                     ) : (
                         <div className="h-full min-h-[400px] flex items-center justify-center bg-slate-50 dark:bg-slate-900/50 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800">

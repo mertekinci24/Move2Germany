@@ -1,0 +1,182 @@
+{
+  "categories": {
+    "housing": {
+      "label": "Housing Platforms",
+      "services": [
+        {
+          "id": "wg_gesucht",
+          "name": "WG-Gesucht",
+          "baseUrl": "https://www.wg-gesucht.de",
+          "searchUrl": "https://www.wg-gesucht.de/wg-zimmer-und-1-zimmer-wohnungen-in-{city}.html",
+          "description": "Most popular platform for shared apartments (WG) and rooms in Germany"
+        },
+        {
+          "id": "immoscout24",
+          "name": "ImmoScout24",
+          "baseUrl": "https://www.immobilienscout24.de",
+          "searchUrl": "https://www.immobilienscout24.de/Suche/de/wohnung-mieten",
+          "description": "Germany's largest real estate portal"
+        },
+        {
+          "id": "ebay_kleinanzeigen",
+          "name": "eBay Kleinanzeigen",
+          "baseUrl": "https://www.kleinanzeigen.de",
+          "searchUrl": "https://www.kleinanzeigen.de/s-wohnung-mieten/c203",
+          "description": "Popular classified ads platform with many housing listings"
+        }
+      ]
+    },
+    "bureaucracy": {
+      "label": "Government & Legal Services",
+      "services": [
+        {
+          "id": "make_it_in_germany",
+          "name": "Make it in Germany",
+          "baseUrl": "https://www.make-it-in-germany.com",
+          "description": "Official German government portal for skilled workers and students"
+        },
+        {
+          "id": "buergeramt_termin",
+          "name": "Bürgeramt Berlin",
+          "baseUrl": "https://service.berlin.de/terminvereinbarung/",
+          "citySpecific": true,
+          "description": "Book appointments for registration (Anmeldung) in Berlin"
+        },
+        {
+          "id": "auslaenderbehoerde",
+          "name": "Ausländerbehörde",
+          "baseUrl": "https://www.berlin.de/einwanderung/",
+          "citySpecific": true,
+          "description": "Foreigners office for visa and residence permits"
+        }
+      ]
+    },
+    "insurance": {
+      "label": "Health Insurance Providers",
+      "services": [
+        {
+          "id": "tk_health",
+          "name": "TK (Techniker Krankenkasse)",
+          "baseUrl": "https://www.tk.de",
+          "description": "Popular public health insurance with excellent digital services"
+        },
+        {
+          "id": "aok_health",
+          "name": "AOK",
+          "baseUrl": "https://www.aok.de",
+          "description": "Public health insurance with wide coverage across Germany"
+        },
+        {
+          "id": "dak_health",
+          "name": "DAK-Gesundheit",
+          "baseUrl": "https://www.dak.de",
+          "description": "Nationwide public health insurance provider"
+        }
+      ]
+    },
+    "banking": {
+      "label": "Banking Services",
+      "services": [
+        {
+          "id": "n26",
+          "name": "N26",
+          "baseUrl": "https://n26.com",
+          "description": "Digital bank with English support and easy account opening"
+        },
+        {
+          "id": "deutsche_bank",
+          "name": "Deutsche Bank",
+          "baseUrl": "https://www.deutsche-bank.de",
+          "description": "Traditional German bank with international presence"
+        },
+        {
+          "id": "sparkasse",
+          "name": "Sparkasse",
+          "baseUrl": "https://www.sparkasse.de",
+          "description": "Local savings bank with branches in every city"
+        }
+      ]
+    },
+    "work": {
+      "label": "Job Search Platforms",
+      "services": [
+        {
+          "id": "stepstone",
+          "name": "StepStone",
+          "baseUrl": "https://www.stepstone.de",
+          "description": "Leading job platform in Germany for professionals"
+        },
+        {
+          "id": "linkedin",
+          "name": "LinkedIn",
+          "baseUrl": "https://www.linkedin.com/jobs",
+          "description": "Professional networking and job search platform"
+        },
+        {
+          "id": "indeed",
+          "name": "Indeed",
+          "baseUrl": "https://de.indeed.com",
+          "description": "Global job search engine with German listings"
+        },
+        {
+          "id": "arbeitsagentur",
+          "name": "Arbeitsagentur",
+          "baseUrl": "https://www.arbeitsagentur.de",
+          "description": "Federal Employment Agency - official job portal"
+        }
+      ]
+    },
+    "social": {
+      "label": "Social & Community Platforms",
+      "services": [
+        {
+          "id": "meetup",
+          "name": "Meetup",
+          "baseUrl": "https://www.meetup.com",
+          "description": "Find and join local community events and groups"
+        },
+        {
+          "id": "internations",
+          "name": "InterNations",
+          "baseUrl": "https://www.internations.org",
+          "description": "Global expat community network"
+        },
+        {
+          "id": "facebook_groups",
+          "name": "Facebook Groups",
+          "baseUrl": "https://www.facebook.com/groups",
+          "description": "Local expat and city-specific groups"
+        },
+        {
+          "id": "eventbrite",
+          "name": "Eventbrite",
+          "baseUrl": "https://www.eventbrite.de",
+          "description": "Discover local events and things to do"
+        }
+      ]
+    },
+    "language": {
+      "label": "Language Learning",
+      "services": [
+        {
+          "id": "tandem",
+          "name": "Tandem",
+          "baseUrl": "https://www.tandem.net",
+          "description": "Find language exchange partners worldwide"
+        },
+        {
+          "id": "babbel",
+          "name": "Babbel",
+          "baseUrl": "https://www.babbel.com",
+          "description": "Language learning app with focus on conversation"
+        },
+        {
+          "id": "duolingo",
+          "name": "Duolingo",
+          "baseUrl": "https://www.duolingo.com",
+          "description": "Gamified language learning platform"
+        }
+      ]
+    }
+  }
+}

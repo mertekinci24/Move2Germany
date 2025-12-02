@@ -2,37 +2,10 @@
   "common": {
     "appName": "Move2Germany",
     "save": "Kaydet",
-    "cancel": "İptal",
-    "delete": "Sil",
-    "edit": "Düzenle",
-    "close": "Kapat",
-    "back": "Geri",
-    "next": "İleri",
-    "language": "Dil",
-    "loading": "Yükleniyor...",
-    "error": "Hata",
-    "success": "Başarılı",
-    "password": "Şifre",
-    "confirmPassword": "Şifre Tekrar",
-    "forgotPassword": "Şifremi Unuttum?",
-    "alreadyHaveAccount": "Zaten hesabınız var mı?",
-    "dontHaveAccount": "Hesabınız yok mu?",
-    "resetPassword": "Şifre Sıfırla",
-    "optional": "İsteğe bağlı"
-  },
-  "journey": {
-    "currentPhase": "Mevcut Aşama",
-    "phaseChange": {
-      "title": "Yeni Aşama Açıldı!",
-      "message": "{phaseLabel} aşamasına hoş geldiniz"
-    }
-  },
-  "housing": {
-    "providers": {
-      "wg_gesucht": "WG-Gesucht",
-      "immobilienscout24": "ImmobilienScout24",
-      "housinganywhere": "HousingAnywhere"
-    }
+    "notes": "Notlar",
+    "calendar": "Takvim",
+    "community": "Topluluk",
+    "settings": "Ayarlar"
   },
   "nav": {
     "overview": "Genel Bakış",
@@ -44,6 +17,18 @@
     "calendar": "Takvim",
     "community": "Topluluk",
     "settings": "Ayarlar"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "signup": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "confirmPassword": "Şifreyi Onayla",
+    "forgotPassword": "Şifremi Unuttum?",
+    "alreadyHaveAccount": "Zaten hesabınız var mı?",
+    "dontHaveAccount": "Hesabınız yok mu?",
+    "resetPassword": "Şifre Sıfırla"
   },
   "onboarding": {
     "welcome": "Move2Germany'ye Hoş Geldiniz",
@@ -67,8 +52,18 @@
     "addNote": "Not Ekle"
   },
   "settings": {
+    "title": "Ayarlar",
+    "subtitle": "Hesabınızı ve tercihlerinizi yönetin",
     "profileInfo": "Profil Bilgileri",
+    "email": "E-posta",
+    "language": "Dil",
     "city": "Şehir",
+    "arrivalDate": "Varış Tarihi",
+    "status": "Durum",
+    "germanLevel": "Almanca Seviyesi",
+    "budgetRange": "Bütçe Aralığı",
+    "saveProfile": "Profili Kaydet",
+    "saving": "Kaydediliyor...",
     "dataManagement": "Veri Yönetimi",
     "exportData": "Verilerimi Dışa Aktar",
     "exporting": "Dışa Aktarılıyor...",
@@ -76,8 +71,21 @@
     "deleteAccount": "Hesabı Sil",
     "deleteAccountWarning": "Hesabınızı sildiğinizde geri dönüş yoktur. Tüm verileriniz sunucularımızdan kalıcı olarak silinecektir.",
     "changePassword": "Şifre Değiştir",
+    "passwordDesc": "Supabase'in güvenli kimlik doğrulama sistemini kullanarak şifrenizi güncelleyin.",
     "currentPassword": "Mevcut Şifre",
-    "newPassword": "Yeni Şifre"
+    "newPassword": "Yeni Şifre",
+    "confirmPassword": "Yeni Şifreyi Onayla",
+    "minChars": "Minimum 8 karakter",
+    "changing": "Değiştiriliyor...",
+    "deleteConfirm": "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "success": {
+      "profile": "Profil başarıyla güncellendi",
+      "password": "Şifre başarıyla değiştirildi"
+    },
+    "error": {
+      "passwordMatch": "Şifreler eşleşmiyor",
+      "passwordLength": "Şifre en az 8 karakter olmalı"
+    }
   },
   "ai": {
     "chatTitle": "AI Asistan",
@@ -102,24 +110,12 @@
     "officialLinks": "Resmi Linkler",
     "suggestedPlatforms": "Önerilen Platformlar",
     "requiredDocuments": "Gerekli Belgeler",
-    "aiTemplates": "AI Şablonları",
-    "generateTemplate": "Şablon Oluştur",
-    "copyTemplate": "Panoya Kopyala",
-    "copied": "Kopyalandı!",
-    "generating": "Oluşturuluyor...",
-    "optional": "Opsiyonel",
-    "noResources": "Bu görev için henüz aksiyon kaynağı yok."
-  },
-  "notes": {
-    "title": "Notlarım",
-    "subtitle": "Düşüncelerinizi ve önemli detayları takip edin.",
-    "newNote": "Yeni Not",
-    "editNote": "Notu Düzenle",
     "noteTitle": "Başlık",
     "noteContent": "İçerik",
     "titlePlaceholder": "örn., Ev arama kontrol listesi",
     "contentPlaceholder": "Düşüncelerinizi buraya yazın...",
     "emptyState": "Henüz not yok. Yazmaya başlayın!",
+    "noResources": "Bu görev için henüz aksiyon kaynağı yok.",
     "deleteConfirm": "Bu notu silmek istediğinizden emin misiniz?",
     "updated": "Güncellendi",
     "success": {
@@ -132,7 +128,11 @@
       "save": "Not kaydedilemedi",
       "delete": "Not silinemedi",
       "titleRequired": "Başlık gerekli"
-    }
+    },
+    "relatedTask": "İlişkili Görev",
+    "selectTask": "Bir görev seçin...",
+    "eventDate": "Etkinlik Tarihi",
+    "createLinked": "Akıllı Not Oluştur"
   },
   "calendar": {
     "title": "Takvim",
@@ -237,15 +237,101 @@
       "close": "Kapat",
       "upload": "Belge yükle (PDF, JPG, PNG, maks 10MB)",
       "uploading": "Yükleniyor...",
-      "deleteDocConfirm": "Bu belgeyi silmek istediğinizden emin misiniz?",
-      "notesPlaceholder": "Notlarınızı buraya ekleyin...",
-      "subtasks": "Alt Görevler",
-      "statusUpdated": "Durum güncellendi: {status}",
-      "mySubtasks": "Alt Görevlerim",
-      "addSubtaskPlaceholder": "Bir alt görev ekle..."
+      "subtasks": "Alt Görevler"
     },
-    "card": {
-      "dependencies": "bağımlılık"
+    "subtask": {
+      "formCriteria": {
+        "maxRent": "Maksimum Kira (€)",
+        "minSize": "Minimum Boyut (m²)",
+        "roomType": "Oda Tipi",
+        "placeholder": "{field} girin..."
+      },
+      "externalAction": {
+        "visit": "Ziyaret Et",
+        "markDone": "Tamamlandı"
+      },
+      "custom": {
+        "badge": "Özel",
+        "add": "Kendi alt görevinizi ekleyin",
+        "placeholder": "Alt görev başlığı girin...",
+        "save": "Kaydet",
+        "cancel": "İptal",
+        "deleteConfirm": "Bu özel alt görev silinsin mi?"
+      },
+      "linked": {
+        "goToTask": "Göreve git"
+      }
+    }
+  },
+  "services": {
+    "language": {
+      "tandem": "Tandem"
+    }
+  },
+  "notes": {
+    "noteTitle": "Başlık",
+    "titlePlaceholder": "örn., Toplantı notları",
+    "noteContent": "İçerik",
+    "contentPlaceholder": "Notlarınızı buraya yazın...",
+    "relatedTask": "İlişkili Görev",
+    "selectTask": "Bir görev seçin...",
+    "eventDate": "Etkinlik Tarihi",
+    "createLinked": "Akıllı Not Oluştur",
+    "createFirst": "İlk notunuzu oluşturun",
+    "deleteConfirm": "Bu notu silmek istediğinizden emin misiniz?",
+    "updated": "Güncellendi",
+    "success": {
+      "created": "Not oluşturuldu",
+      "updated": "Not güncellendi",
+      "deleted": "Not silindi"
+    },
+    "error": {
+      "load": "Notlar yüklenemedi",
+      "save": "Not kaydedilemedi",
+      "delete": "Not silinemedi",
+      "titleRequired": "Başlık gerekli"
+    }
+  },
+  "scamDetector": {
+    "title": "Konut Dolandırıcılığı Dedektörü",
+    "subtitle": "Yaygın dolandırıcılık kalıplarını kontrol etmek için kiralık ilan açıklamasını veya mesajı buraya yapıştırın.",
+    "tabName": "Dolandırıcılık Kontrolü",
+    "placeholder": "Metni buraya yapıştırın...",
+    "analyze": "Metni Analiz Et",
+    "score": "Dolandırıcılık İhtimali Puanı",
+    "detectedIssues": "Tespit Edilen Sorunlar",
+    "safeMessage": "Yaygın dolandırıcılık kalıpları tespit edilmedi. Yine de her zaman dikkatli olun.",
+    "disclaimer": "Bu araç, potansiyel dolandırıcılıkları belirlemek için kalıp eşleştirme kullanır. %100 doğru değildir ve yalnızca tavsiye niteliğinde kullanılmalıdır.",
+    "riskLevel": {
+      "safe": "Düşük Risk",
+      "suspicious": "Şüpheli",
+      "high_risk": "Yüksek Risk"
+    },
+    "patterns": {
+      "payment": {
+        "name": "Şüpheli Ödeme Yöntemi",
+        "desc": "Daireyi görmeden önce Western Union, MoneyGram veya havale talepleri."
+      },
+      "abroad": {
+        "name": "Ev Sahibi Yurt Dışında",
+        "desc": "Ev sahibinin ülke dışında olduğunu ve daireyi gösteremeyeceğini iddia ediyor."
+      },
+      "keys": {
+        "name": "Posta Yoluyla Anahtar",
+        "desc": "Depozito karşılığında anahtarları posta yoluyla göndermeyi teklif ediyor."
+      },
+      "proxy": {
+        "name": "Başkası Adına Kiralama",
+        "desc": "Bir aile üyesi veya arkadaşı adına kiraladığını iddia ediyor."
+      },
+      "tooGood": {
+        "name": "Gerçek Olamayacak Kadar İyi",
+        "desc": "Fiyat, açıklanan olanaklar için piyasa ortalamasından önemli ölçüde düşük."
+      },
+      "email": {
+        "name": "E-posta İletişimi",
+        "desc": "Konuşmayı platform dışına taşımak için kullanılabilecek e-posta adresleri içeriyor."
+      }
     }
   }
 }

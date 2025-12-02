@@ -2,48 +2,21 @@
   "common": {
     "appName": "Move2Germany",
     "save": "حفظ",
-    "cancel": "إلغاء",
-    "delete": "حذف",
-    "edit": "تعديل",
-    "close": "إغلاق",
-    "back": "رجوع",
-    "next": "التالي",
-    "language": "اللغة",
-    "loading": "جاري التحميل...",
-    "error": "خطأ",
-    "success": "نجاح",
-    "password": "كلمة المرور",
-    "confirmPassword": "تأكيد كلمة المرور",
-    "forgotPassword": "نسيت كلمة المرور؟",
-    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
-    "dontHaveAccount": "ليس لديك حساب؟",
-    "resetPassword": "إعادة تعيين كلمة المرور",
-    "optional": "اختياري"
-  },
-  "journey": {
-    "currentPhase": "المرحلة الحالية",
-    "phaseChange": {
-      "title": "تم فتح مرحلة جديدة!",
-      "message": "مرحباً بك في {phaseLabel}"
-    }
-  },
-  "housing": {
-    "providers": {
-      "wg_gesucht": "WG-Gesucht",
-      "immobilienscout24": "ImmobilienScout24",
-      "housinganywhere": "HousingAnywhere"
-    }
-  },
-  "nav": {
-    "overview": "نظرة عامة",
-    "housing": "الإسكان",
-    "bureaucracy": "البيروقراطية",
-    "work": "العمل",
-    "social": "اجتماعي",
     "notes": "ملاحظات",
     "calendar": "التقويم",
     "community": "المجتمع",
-    "settings": "إعدادات"
+    "settings": "الإعدادات"
+  },
+  "nav": {
+    "overview": "نظرة عامة",
+    "housing": "السكن",
+    "bureaucracy": "البيروقراطية",
+    "work": "العمل",
+    "social": "الحياة الاجتماعية",
+    "notes": "ملاحظات",
+    "calendar": "التقويم",
+    "community": "المجتمع",
+    "settings": "الإعدادات"
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -53,77 +26,98 @@
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
     "forgotPassword": "نسيت كلمة المرور؟",
-    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
     "dontHaveAccount": "ليس لديك حساب؟",
     "resetPassword": "إعادة تعيين كلمة المرور"
   },
   "onboarding": {
-    "welcome": "مرحباً بك في Move2Germany",
+    "welcome": "مرحبًا بك في Move2Germany",
     "step1Title": "المعلومات الشخصية",
     "step2Title": "التفضيلات",
     "selectCity": "اختر مدينتك",
     "arrivalDate": "تاريخ الوصول",
     "personaType": "أنا",
     "student": "طالب",
-    "worker": "محترف",
+    "worker": "محترف / عامل",
     "germanLevel": "مستوى اللغة الألمانية",
     "budgetRange": "الميزانية الشهرية",
-    "complete": "إتمام الإعداد"
+    "complete": "إكمال الإعداد"
   },
   "dashboard": {
-    "critical": "حرج",
-    "high": "عالي",
+    "todayTasks": "مهام اليوم",
+    "thisWeek": "هذا الأسبوع",
+    "criticalTasks": "مهام عاجلة",
+    "completedTasks": "مكتملة",
+    "markAsDone": "تحديد كمكتمل",
+    "addNote": "إضافة ملاحظة"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة حسابك وتفضيلاتك",
+    "profileInfo": "معلومات الملف الشخصي",
+    "email": "البريد الإلكتروني",
+    "language": "اللغة",
+    "city": "المدينة",
+    "arrivalDate": "تاريخ الوصول",
+    "status": "الحالة",
+    "germanLevel": "مستوى الألمانية",
+    "budgetRange": "نطاق الميزانية",
+    "saveProfile": "حفظ الملف الشخصي",
+    "saving": "جاري الحفظ...",
+    "dataManagement": "إدارة البيانات",
+    "exportData": "تصدير بياناتي",
     "exporting": "جاري التصدير...",
     "dangerZone": "منطقة الخطر",
     "deleteAccount": "حذف الحساب",
-    "deleteAccountWarning": "بمجرد حذف حسابك، لا يمكن التراجع. سيتم حذف جميع بياناتك نهائياً من خوادمنا.",
+    "deleteAccountWarning": "بمجرد حذف حسابك، لا يمكن التراجع عن ذلك. سيتم حذف جميع بياناتك نهائيًا من خوادمنا.",
     "changePassword": "تغيير كلمة المرور",
+    "passwordDesc": "قم بتحديث كلمة المرور الخاصة بك باستخدام نظام المصادقة الآمن من Supabase.",
     "currentPassword": "كلمة المرور الحالية",
-    "newPassword": "كلمة المرور الجديدة"
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "minChars": "الحد الأدنى 8 أحرف",
+    "changing": "جاري التغيير...",
+    "deleteConfirm": "هل أنت متأكد أنك تريد حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
+    "success": {
+      "profile": "تم تحديث الملف الشخصي بنجاح",
+      "password": "تم تغيير كلمة المرور بنجاح"
+    },
+    "error": {
+      "passwordMatch": "كلمات المرور غير متطابقة",
+      "passwordLength": "يجب أن تكون كلمة المرور 8 أحرف على الأقل"
+    }
   },
   "ai": {
-    "chatTitle": "المساعد الذكي",
+    "chatTitle": "مساعد الذكاء الاصطناعي",
     "placeholder": "اسألني أي شيء عن الانتقال إلى ألمانيا...",
     "send": "إرسال"
   },
   "timeWindows": {
-    "pre_arrival": "قبل الوصول (0-3 أشهر)",
+    "pre_arrival": "قبل الوصول (0-3 أشهر قبل)",
     "week_1": "الأسبوع 1",
     "weeks_2_4": "الأسابيع 2-4",
     "month_2": "الشهر 2",
     "month_3": "الشهر 3"
   },
   "modules": {
-    "housing": "الإسكان",
+    "housing": "السكن",
     "bureaucracy": "البيروقراطية",
     "work": "العمل",
-    "social": "الاجتماعي"
+    "social": "الحياة الاجتماعية"
   },
   "actionBlock": {
     "title": "موارد العمل",
-    "officialLinks": "الروابط الرسمية",
-    "suggestedPlatforms": "المنصات المقترحة",
+    "officialLinks": "روابط رسمية",
+    "suggestedPlatforms": "منصات مقترحة",
     "requiredDocuments": "المستندات المطلوبة",
-    "aiTemplates": "قوالب AI",
-    "generateTemplate": "إنشاء قالب",
-    "copyTemplate": "نسخ إلى الحافظة",
-    "copied": "تم النسخ!",
-    "generating": "جاري الإنشاء...",
-    "optional": "اختياري",
-    "noResources": "لا توجد موارد عمل متاحة لهذه المهمة بعد."
-  },
-  "notes": {
-    "title": "ملاحظاتي",
-    "subtitle": "تتبع أفكارك والتفاصيل المهمة.",
-    "newNote": "ملاحظة جديدة",
-    "editNote": "تعديل الملاحظة",
     "noteTitle": "العنوان",
     "noteContent": "المحتوى",
     "titlePlaceholder": "مثال: قائمة التحقق للبحث عن شقة",
     "contentPlaceholder": "اكتب أفكارك هنا...",
     "emptyState": "لا توجد ملاحظات بعد. ابدأ الكتابة!",
+    "noResources": "لا توجد موارد عمل متاحة لهذه المهمة بعد.",
     "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الملاحظة؟",
-    "updated": "محدث",
+    "updated": "تم التحديث",
     "success": {
       "created": "تم إنشاء الملاحظة",
       "updated": "تم تحديث الملاحظة",
@@ -134,29 +128,33 @@
       "save": "فشل حفظ الملاحظة",
       "delete": "فشل حذف الملاحظة",
       "titleRequired": "العنوان مطلوب"
-    }
+    },
+    "relatedTask": "مهمة ذات صلة",
+    "selectTask": "اختر مهمة...",
+    "eventDate": "تاريخ الحدث",
+    "createLinked": "إنشاء ملاحظة ذكية"
   },
   "calendar": {
     "title": "التقويم",
     "today": "اليوم",
-    "tasksDue": "المهام المستحقة",
-    "events": "الفعاليات",
-    "noTasks": "لا توجد مهام مستحقة هذا اليوم",
-    "noEvents": "لا توجد فعاليات هذا اليوم",
-    "selectDate": "اختر تاريخاً",
+    "tasksDue": "مهام مستحقة",
+    "events": "أحداث",
+    "noTasks": "لا توجد مهام مستحقة في هذا اليوم",
+    "noEvents": "لا توجد أحداث في هذا اليوم",
+    "selectDate": "اختر تاريخًا",
     "selectDatePrompt": "انقر على تاريخ لعرض التفاصيل",
     "loading": "جاري تحميل التقويم...",
     "error": "فشل تحميل بيانات التقويم"
   },
   "events": {
-    "title": "الفعاليات",
-    "noEvents": "لا توجد فعاليات قادمة",
-    "noEventsDesc": "تحقق لاحقاً من التجمعات الاجتماعية وورش العمل.",
+    "title": "الأحداث",
+    "noEvents": "لا توجد أحداث قادمة",
+    "noEventsDesc": "تحقق لاحقًا من التجمعات الاجتماعية وورش العمل.",
     "free": "مجاني",
     "online": "عبر الإنترنت",
     "viewDetails": "عرض التفاصيل",
-    "detailsUnavailable": "التفاصيل غير متاحة",
-    "error": "فشل تحميل الفعاليات"
+    "detailsUnavailable": "التفاصيل غير متوفرة",
+    "error": "فشل تحميل الأحداث"
   },
   "community": {
     "title": "المجتمع",
@@ -165,7 +163,7 @@
       "chat": "دردشة المدينة"
     },
     "chat": {
-      "comingSoon": "دردشة المدينة قريباً",
+      "comingSoon": "دردشة المدينة قريبًا",
       "desc": "تواصل مع المغتربين الآخرين في مدينتك في الوقت الفعلي. نحن نضع اللمسات الأخيرة على هذه الميزة."
     },
     "forum": {
@@ -176,19 +174,19 @@
       "replies": "ردود",
       "backToDiscussions": "العودة للمناقشات",
       "reply": "رد",
-      "writeReply": "اكتب رداً...",
+      "writeReply": "اكتب ردًا...",
       "noReplies": "لا توجد ردود بعد. كن أول من يرد!",
       "createTopic": "بدء مناقشة جديدة",
       "topicTitle": "العنوان",
       "topicCategory": "الفئة",
       "topicContent": "المحتوى",
       "titlePlaceholder": "ما الذي يدور في ذهنك؟",
-      "contentPlaceholder": "شارك أفكارك، أسئلتك، أو تجاربك...",
+      "contentPlaceholder": "شارك أفكارك أو أسئلتك أو تجاربك...",
       "postTopic": "نشر الموضوع",
       "posting": "جاري النشر...",
       "categories": {
         "general": "مناقشة عامة",
-        "housing": "الإسكان",
+        "housing": "السكن",
         "bureaucracy": "البيروقراطية",
         "social": "الحياة الاجتماعية",
         "jobs": "الوظائف والمهنة"
@@ -208,16 +206,16 @@
   },
   "overview": {
     "title": "نظرة عامة",
-    "subtitle": "لمحة عن رحلتك لمدة 90 يوماً",
+    "subtitle": "لمحة عن رحلتك لمدة 90 يومًا",
     "totalTasks": "إجمالي المهام",
-    "completed": "مكتمل",
+    "completed": "مكتملة",
     "inProgress": "قيد التنفيذ",
-    "blocked": "محظور",
-    "todo": "للقيام به",
+    "blocked": "محظورة",
+    "todo": "للعمل",
     "moduleProgress": "تقدم الوحدة",
-    "criticalTasks": "المهام الحرجة",
-    "noCriticalTasks": "لا توجد مهام حرجة معلقة",
-    "noCriticalTasksDesc": "أنت على اطلاع دائم بجميع العناصر ذات الأولوية العالية!"
+    "criticalTasks": "مهام عاجلة",
+    "noCriticalTasks": "لا توجد مهام عاجلة معلقة",
+    "noCriticalTasksDesc": "لقد أنجزت جميع العناصر ذات الأولوية العالية!"
   },
   "tasks": {
     "importance": {
@@ -230,7 +228,7 @@
       "description": "الوصف",
       "status": "الحالة",
       "notes": "ملاحظات",
-      "documents": "المستندات",
+      "documents": "مستندات",
       "dependencies": "التبعيات",
       "blockedBy": "هذه المهمة محظورة بواسطة",
       "completeFirst": "أكمل هذه المهام أولاً:",
@@ -239,15 +237,101 @@
       "close": "إغلاق",
       "upload": "تحميل مستند (PDF, JPG, PNG, بحد أقصى 10MB)",
       "uploading": "جاري التحميل...",
-      "deleteDocConfirm": "هل أنت متأكد أنك تريد حذف هذا المستند؟",
-      "notesPlaceholder": "أضف ملاحظاتك هنا...",
-      "subtasks": "المهام الفرعية",
-      "statusUpdated": "تم تحديث الحالة: {status}",
-      "mySubtasks": "مهامي الفرعية",
-      "addSubtaskPlaceholder": "أضف مهمة فرعية..."
+      "subtasks": "المهام الفرعية"
     },
-    "card": {
-      "dependencies": "تبعية"
+    "subtask": {
+      "formCriteria": {
+        "maxRent": "الحد الأقصى للإيجار (€)",
+        "minSize": "الحد الأدنى للمساحة (م²)",
+        "roomType": "نوع الغرفة",
+        "placeholder": "أدخل {field}..."
+      },
+      "externalAction": {
+        "visit": "زيارة",
+        "markDone": "تم"
+      },
+      "custom": {
+        "badge": "مخصص",
+        "add": "أضف مهمتك الفرعية الخاصة",
+        "placeholder": "أدخل عنوان المهمة الفرعية...",
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "deleteConfirm": "حذف هذه المهمة الفرعية المخصصة؟"
+      },
+      "linked": {
+        "goToTask": "الذهاب للمهمة"
+      }
+    }
+  },
+  "services": {
+    "language": {
+      "tandem": "ترادف (Tandem)"
+    }
+  },
+  "notes": {
+    "noteTitle": "العنوان",
+    "titlePlaceholder": "مثال: ملاحظات الاجتماع",
+    "noteContent": "المحتوى",
+    "contentPlaceholder": "اكتب ملاحظاتك هنا...",
+    "relatedTask": "مهمة ذات صلة",
+    "selectTask": "اختر مهمة...",
+    "eventDate": "تاريخ الحدث",
+    "createLinked": "إنشاء ملاحظة ذكية",
+    "createFirst": "أنشئ ملاحظتك الأولى",
+    "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الملاحظة؟",
+    "updated": "تم التحديث",
+    "success": {
+      "created": "تم إنشاء الملاحظة",
+      "updated": "تم تحديث الملاحظة",
+      "deleted": "تم حذف الملاحظة"
+    },
+    "error": {
+      "load": "فشل تحميل الملاحظات",
+      "save": "فشل حفظ الملاحظة",
+      "delete": "فشل حذف الملاحظة",
+      "titleRequired": "العنوان مطلوب"
+    }
+  },
+  "scamDetector": {
+    "title": "كاشف الاحتيال السكني",
+    "subtitle": "الصق وصف قائمة الإيجار أو الرسالة للتحقق من أنماط الاحتيال الشائعة.",
+    "tabName": "فحص الاحتيال",
+    "placeholder": "الصق النص هنا...",
+    "analyze": "تحليل النص",
+    "score": "درجة احتمالية الاحتيال",
+    "detectedIssues": "المشاكل المكتشفة",
+    "safeMessage": "لم يتم اكتشاف أنماط احتيال شائعة. ومع ذلك، توخ الحذر دائمًا.",
+    "disclaimer": "تستخدم هذه الأداة مطابقة الأنماط لتحديد عمليات الاحتيال المحتملة. إنها ليست دقيقة بنسبة 100٪ ويجب استخدامها كأداة استشارية فقط.",
+    "riskLevel": {
+      "safe": "مخاطر منخفضة",
+      "suspicious": "مشبوه",
+      "high_risk": "مخاطر عالية"
+    },
+    "patterns": {
+      "payment": {
+        "name": "طريقة دفع مشبوهة",
+        "desc": "طلبات ويسترن يونيون، موني جرام، أو تحويلات بنكية قبل رؤية الشقة."
+      },
+      "abroad": {
+        "name": "المالك في الخارج",
+        "desc": "يدعي أن المالك خارج البلاد ولا يمكنه عرض الشقة."
+      },
+      "keys": {
+        "name": "المفاتيح عبر البريد",
+        "desc": "يعرض إرسال المفاتيح بالبريد مقابل وديعة."
+      },
+      "proxy": {
+        "name": "التأجير للغير",
+        "desc": "يدعي أنه يؤجر نيابة عن فرد من العائلة أو صديق."
+      },
+      "tooGood": {
+        "name": "جيد جدًا ليكون حقيقيًا",
+        "desc": "السعر أقل بكثير من متوسط السوق لوسائل الراحة الموصوفة."
+      },
+      "email": {
+        "name": "الاتصال عبر البريد الإلكتروني",
+        "desc": "يحتوي على عناوين بريد إلكتروني، والتي يمكن استخدامها أحيانًا لنقل المحادثة خارج المنصة."
+      }
     }
   }
 }

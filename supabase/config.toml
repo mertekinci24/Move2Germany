@@ -1,0 +1,22 @@
+project_id = "Move2Germany"
+
+[api]
+port = 54321
+
+[db]
+port = 54322
+
+[studio]
+enabled = false
+
+[storage]
+enabled = false
+
+[auth]
+enabled = true
+
+[edge_runtime]
+enabled = true
+
+[analytics]
+enabled = false

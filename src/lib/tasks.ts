@@ -14,6 +14,12 @@ export type UserTask = {
   updatedAt: string;
   subtaskProgress: Record<string, boolean>;
   metadata: Record<string, any>;
+  // Dynamic task fields
+  title?: string;
+  description?: string;
+  module?: string;
+  timeWindow?: string;
+  isSystemGenerated?: boolean;
 };
 
 export type UserSubtask = {
@@ -358,7 +364,8 @@ export async function getTasksWithStatus(
     personaType?: string | null;
   }
 ): Promise<TaskWithStatus[]> {
-  const tasks = configLoader.filterTasks({
+  // 1. Get static tasks (filtered)
+  const staticTasks = configLoader.filterTasks({
     cityId: filters?.cityId,
     timeWindowId: filters?.timeWindowId,
     moduleId: filters?.moduleId,
@@ -368,6 +375,7 @@ export async function getTasksWithStatus(
     personaType: filters?.personaType
   });
 
+  // 2. Get all user tasks for this user (we need all to merge, filtering happens later for dynamic ones)
   const userTasks = await getUserTasks(userId, {
     status: filters?.status
   });
@@ -376,10 +384,65 @@ export async function getTasksWithStatus(
     userTasks.map(ut => [ut.taskId, ut])
   );
 
-  return tasks.map(task => ({
+  // 3. Merge static tasks with user status
+  const mergedStaticTasks = staticTasks.map(task => ({
     ...task,
     userTask: userTaskMap.get(task.id)
   }));
+
+  // 4. Identify and process dynamic tasks
+  // Dynamic tasks are those in userTasks that are NOT in staticTasks map (conceptually)
+  // But since we only fetched filtered static tasks, we need to be careful.
+  // We should check if the userTask has 'title' and 'description' which indicates it's a dynamic task.
+  // And then apply the SAME filters to these dynamic tasks.
+
+  const dynamicTasks: TaskWithStatus[] = [];
+  const staticTaskIds = new Set(configLoader.getTasks(filters?.locale).map(t => t.id)); // All static IDs
+
+  for (const ut of userTasks) {
+    // If it's a known static task, it's already handled (or filtered out by static filters)
+    if (staticTaskIds.has(ut.taskId)) continue;
+
+    // If it's a dynamic task (has title/desc)
+    if (ut.title && ut.description) {
+      // Apply filters manually
+      let matches = true;
+
+      // Module filter
+      if (filters?.moduleId && ut.module !== filters.moduleId) matches = false;
+
+      // Time Window filter
+      if (filters?.timeWindowId && ut.timeWindow !== filters.timeWindowId) matches = false;
+
+      // Search filter
+      if (filters?.search) {
+        const searchLower = filters.search.toLowerCase();
+        if (!ut.title.toLowerCase().includes(searchLower) &&
+          !ut.description.toLowerCase().includes(searchLower)) {
+          matches = false;
+        }
+      }
+
+      // Note: We skip cityId, importance, personaType filters for dynamic tasks for now 
+      // as they might not have these fields populated or applicable.
+
+      if (matches) {
+        dynamicTasks.push({
+          id: ut.taskId,
+          title: ut.title,
+          description: ut.description,
+          module: (ut.module as any) || 'social', // Default or cast
+          timeWindow: ut.timeWindow || 'week_1', // Default
+          importance: 'recommended', // Default
+          cityScope: [], // Universal
+          dependencies: [],
+          userTask: ut
+        });
+      }
+    }
+  }
+
+  return [...mergedStaticTasks, ...dynamicTasks];
 }
 
 export async function initializeUserTasks(userId: string, cityId: string): Promise<void> {
@@ -433,8 +496,50 @@ function mapDbToUserTask(data: Record<string, unknown>): UserTask {
     createdAt: data.created_at as string,
     updatedAt: data.updated_at as string,
     subtaskProgress: (data.subtask_progress as Record<string, boolean>) || {},
-    metadata: (data.metadata as Record<string, any>) || {}
+    metadata: (data.metadata as Record<string, any>) || {},
+    // Dynamic fields
+    title: data.title as string | undefined,
+    description: data.description as string | undefined,
+    module: data.module as string | undefined,
+    timeWindow: data.time_window as string | undefined,
+    isSystemGenerated: data.is_system_generated as boolean | undefined
   };
+}
+
+export async function createDynamicTask(
+  userId: string,
+  taskData: {
+    title: string;
+    description: string;
+    module: 'housing' | 'job' | 'bureaucracy' | 'social';
+    timeWindow: string;
+  }
+): Promise<UserTask> {
+  // Generate a unique ID for the dynamic task
+  const taskId = `dynamic-${crypto.randomUUID()}`;
+
+  const { data, error } = await supabase
+    .from('user_tasks')
+    .insert({
+      user_id: userId,
+      task_id: taskId,
+      status: 'todo',
+      title: taskData.title,
+      description: taskData.description,
+      module: taskData.module,
+      time_window: taskData.timeWindow,
+      is_system_generated: true,
+      subtask_progress: {},
+      metadata: {}
+    })
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return mapDbToUserTask(data);
 }
 
 function mapDbToUserSubtask(data: Record<string, unknown>): UserSubtask {

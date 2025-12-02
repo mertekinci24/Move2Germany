@@ -1,0 +1,25 @@
+{
+    "platforms": [
+        {
+            "id": "wg_gesucht",
+            "name": "WG-Gesucht",
+            "baseUrl": "https://www.wg-gesucht.de",
+            "searchUrl": "https://www.wg-gesucht.de/wg-zimmer-und-1-zimmer-wohnungen-in-{city}.html",
+            "description": "Most popular platform for shared apartments (WG) and rooms in Germany"
+        },
+        {
+            "id": "immoscout24",
+            "name": "ImmoScout24",
+            "baseUrl": "https://www.immobilienscout24.de",
+            "searchUrl": "https://www.immobilienscout24.de/Suche/de/wohnung-mieten",
+            "description": "Germany's largest real estate portal"
+        },
+        {
+            "id": "ebay_kleinanzeigen",
+            "name": "eBay Kleinanzeigen",
+            "baseUrl": "https://www.kleinanzeigen.de",
+            "searchUrl": "https://www.kleinanzeigen.de/s-wohnung-mieten/c203",
+            "description": "Popular classified ads platform with many housing listings"
+        }
+    ]
+}

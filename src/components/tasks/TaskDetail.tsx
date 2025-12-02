@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X, Upload, FileText, Trash2, AlertCircle, Save } from 'lucide-react';
 import { TaskWithStatus, updateUserTask, checkDependencies, getUserTasks, updateUserTaskMetadata } from '../../lib/tasks';
 import { configLoader, Task } from '../../lib/config';
@@ -7,7 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useI18n } from '../../contexts/I18nContext';
 import { ActionBlock } from './ActionBlock';
 import { SubtaskList } from './SubtaskList';
-import { SubtaskEditor } from './SubtaskEditor';
+import { SmartNoteList } from '../notes/SmartNoteList';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
@@ -23,11 +24,8 @@ type TaskDetailProps = {
 export function TaskDetail({ task, onClose, onUpdate, onNavigate }: TaskDetailProps) {
   const { user } = useAuth();
   const { t } = useI18n();
+  const navigate = useNavigate();
   const [status, setStatus] = useState(task.userTask?.status || 'todo');
-  const [notes, setNotes] = useState(task.userTask?.notes || '');
-  const handleNotesChange = (e: any) => {
-    setNotes(e.target.value);
-  };
   const [saving, setSaving] = useState(false);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -84,7 +82,7 @@ export function TaskDetail({ task, onClose, onUpdate, onNavigate }: TaskDetailPr
 
     setSaving(true);
     try {
-      await updateUserTask(user.id, task.id, { status, notes, metadata });
+      await updateUserTask(user.id, task.id, { status, metadata });
       toast.success(t('common.success'));
       onUpdate();
     } catch (error) {
@@ -159,6 +157,8 @@ export function TaskDetail({ task, onClose, onUpdate, onNavigate }: TaskDetailPr
       toast.error((error as Error).message);
     }
   }
+
+
 
   const importanceVariants: Record<string, "danger" | "warning" | "secondary" | "primary" | "success" | "neutral"> = {
     critical: 'danger',
@@ -261,20 +261,11 @@ export function TaskDetail({ task, onClose, onUpdate, onNavigate }: TaskDetailPr
             onMetadataChange={handleMetadataChange}
           />
 
-          {user && (
-            <SubtaskEditor userId={user.id} taskId={task.id} />
-          )}
 
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">{t('tasks.detail.notes')}</h3>
-            <textarea
-              value={notes}
-              onChange={handleNotesChange}
-              rows={4}
-              placeholder={t('tasks.detail.notesPlaceholder')}
-              className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
-            />
-          </div>
+
+          {user && (
+            <SmartNoteList taskId={task.id} userId={user.id} />
+          )}
 
           <ActionBlock task={task} userCity={user?.primaryCityId || undefined} metadata={metadata} />
 

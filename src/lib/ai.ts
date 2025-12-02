@@ -88,6 +88,22 @@ export async function sendMessage(
     systemInstruction: SYSTEM_PROMPT
   });
 
+  // MOCK MODE: If API key is dummy or missing, return a mock response
+  if (!apiKey || apiKey === 'dummy-key') {
+    console.warn('Using Mock AI Response');
+    const mockResponse = "This is a mock response from the AI Assistant. The API key is missing, but the chat functionality is working. You asked: " + message;
+
+    await supabase
+      .from('ai_messages')
+      .insert({
+        conversation_id: convId,
+        role: 'assistant',
+        content: mockResponse
+      });
+
+    return { response: mockResponse, conversationId: convId };
+  }
+
   const chat = model.startChat({
     history: history.slice(0, -1).map(msg => ({
       role: msg.role === 'assistant' ? 'model' : 'user',

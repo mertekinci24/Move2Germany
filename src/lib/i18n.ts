@@ -4,7 +4,7 @@ import arTranslations from '../locales/ar.json';
 import deTranslations from '../locales/de.json';
 
 export const SUPPORTED_LOCALES = ['en', 'tr', 'ar', 'de'] as const;
-export const VISIBLE_LOCALES = ['en', 'tr', 'ar'] as const;
+export const VISIBLE_LOCALES = ['en', 'tr', 'ar', 'de'] as const;
 
 export type Locale = typeof SUPPORTED_LOCALES[number];
 export type VisibleLocale = typeof VISIBLE_LOCALES[number];
